@@ -2,8 +2,11 @@
 <html lang="en">
 
 <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Public Knowledge</title>
@@ -15,15 +18,118 @@
             --text-reg: #3A3A3A;
         }
 
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            /* Add your styles for headings here */
+            font-weight: 700;
+        }
+
         /* Add your CSS code here */
         body {
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+            font-size: 1em;
             margin: 0;
             line-height: 1.4;
             padding: 0;
-            text-align: center;
             color: var(--text-reg);
+            background-color: #f2f1f5;
         }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 750px;
+            margin: auto;
+            padding: 40px 0 2px 0;
+            align-items: center;
+        }
+
+        footer {
+            width: 800px;
+            margin: auto;
+            text-align: center;
+            padding: 40px 0;
+            color: #C2C2C2;
+        }
+
+        .uncard {
+            width: 720px;
+            margin: auto;
+            padding: 20px 0 2px 0;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+        }
+
+        .card {
+            background-color: #fefefe;
+            position: sticky;
+            padding: 4px 24px 24px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin: 20px 12px;
+            /* max-height: 40vh;
+            overflow-y: scroll; */
+        }
+
+        .card-stack {
+            width: 800px;
+            margin: auto;
+        }
+
+        .asterisk-line h3::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-image: url(pkstar.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-bottom: -3px;
+            margin-right: 8px;
+        }
+
+        .asterisk-line p {
+            border-left: 1px solid #C2C2C2;
+            margin: -21px 0 -20px 9px;
+            padding: 12px 0 32px 19px;
+
+        }
+
+        .asterisk-line:last-child p {
+            border-left: none;
+        }
+
+        .asterisk-bullet-line h3::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-image: url(pkstar.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-bottom: -3px;
+            margin-right: 8px;
+        }
+
+        .asterisk-bullet-line p {
+            line-height: 1.75;
+            border-left: 1px solid #C2C2C2;
+            margin: 20px 0 0px 9px;
+            padding: 4px 0 4px 19px;
+        }
+
 
         #logo {
             opacity: 0;
@@ -31,16 +137,10 @@
             scale: 40;
         }
 
-        .brand {
+        .logo-text {
             font-family: 'Shippori Antique';
-            font-size: 36px;
+            font-size: 24px;
             line-height: 1.2;
-        }
-
-        .sub {
-            max-width: 500px;
-            padding: 0px 20px 0 20px;
-            color: #666;
         }
 
         @keyframes spin {
@@ -94,19 +194,23 @@
             text-align: left;
         }
 
-        .card {
-            padding: 24px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            max-width: 800px;
-            margin: 28px;
+
+
+        /* .top-1 {
+            top: 20px;
         }
 
-        .card-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: -10px;
+        .top-2 {
+            top: 100px;
         }
+
+        .top-3 {
+            top: 180px;
+        }
+
+        .top-4 {
+            top: 260px;
+        } */
 
         @keyframes fadeInUp {
             0% {
@@ -120,21 +224,44 @@
             }
         }
 
-        #copyemail {
-            display: inline;
+        .button {
+            display: inline-block;
             padding: 8px 12px;
             color: rgb(72 66 92);
             border-radius: 4px;
             background: #e5e3eb;
-            margin-left: -2px;
+            margin: 4px 8px 0 -2px;
+            text-decoration: none;
             width: auto;
         }
 
-        #copyemail:hover {
+        .button:hover {
             cursor: pointer;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
+
+            body {
+                font-size: 14px;
+            }
+
+            header {
+                width: calc(100vw - 48px);
+                margin: 20px 0 20px 10px;
+                padding: 0;
+                gap: 12px;
+            }
+
+            footer {
+                width: calc(100vw - 48px);
+                margin: 20px 0 20px 24px;
+                padding: 0;
+            }
+
+            .button {
+                padding: 8px 12px;
+                margin: 8px 8px 8px -2px;
+            }
 
             /* Add your mobile-only CSS code here */
             .container {
@@ -145,27 +272,149 @@
                 bottom: 0;
             }
 
-            .card-title {
-                font-size: 16px;
+            .logo-text {
+                font-size: 24px;
+            }
+
+            .card-stack {
+                margin-left: 4px;
+                width: calc(100vw - 48px);
+            }
+
+            .uncard {
+                width: calc(100vw - 48px);
+                padding: 20px;
+                margin: 0;
+                border: none;
+                border-radius: 0;
+            }
+
+            .card {
+                width: calc(100vw - 48px);
+                padding: 20px;
+                margin: 0;
+                border: none;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            }
+
+            .card-stack .card:first-child {
+                border-radius: 4px 4px 0 0;
+            }
+
+            .card-stack .card:last-child {
+                border-radius: 0 0 4px 4px;
+            }
+
+            .flex-row {
+                flex-direction: column;
+                gap: 12px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Add your content here -->
-    <div class="card-stack">
-        <img id="logo" class="spinny" src="pkstar.svg" alt="Public Knowledge logo">
-        <div class="brand fadeInUp-1">Public Knowledge Studio</div>
-        <p class="sub fadeInUp-2">Public Knowledge is a design studio that makes technology work for humans.<br>We specialise in interactive, hand-crafted web and app experiences that feel uniquely yours.</p>
 
-        <div class="fadeInUp-3 container">
-            <div class="card-title">Want to work with us?</div>
-            <p>Get in touch with <span id="email">projects@publicknowledge.co</span> and tell us what you'd like to do. Work samples available on request.</p>
-            <div id="copyemail" onclick="copyEmail()">Copy Email</div>
+    <header>
+        <img id="logo" class="spinny" src="pkstar.svg" alt="Public Knowledge logo">
+        <span class="logo-text fadeInUp-1">Public<br>Knowledge<br>Studio</span>
+    </header>
+
+    <div class="uncard">
+        <p class="sub fadeInUp-2">Public Knowledge is a design studio that makes technology work for humans.</p>
+        <p class="sub fadeInUp-2">We specialise in interactive, hand-crafted web and app experiences that feel uniquely
+            yours.</p>
+    </div>
+
+    <div class="card-stack">
+
+        <div class="card top-1 fadeInUp-2">
+            <h2>Want to work with us?</h2>
+            <p>Get in touch with <span id="email">projects@publicknowledge.co</span> and tell us what you'd like to do.
+                Work samples available on request.</p>
+            <a class="button" href="mailto:projects@publicknowledge.co">Send Email</a>
+            <div class="button" id="copyemail" onclick="copyEmail()">Copy Email ID</div>
         </div>
 
+        <div class="card top-2 fadeInUp-3">
 
+            <h2>Our Process</h2>
+
+            <div class="asterisk-line">
+                <h3>Introduce & Identify</h3>
+                <p>We start with a quick chat to get a full picture of your needs, goals, and aspirations to determine
+                    if you’d benefit more from our traditional research + design process or a brisker sprint format.</p>
+            </div>
+
+            <div class="asterisk-line">
+                <h3>Propose</h3>
+                <p>After understanding your needs, we provide a budget and detailed project plan with process scope,
+                    deliverables, and associated timelines for your review. Upon the approval of the proposal, we
+                    finalize the contract, scope of work, and initial deposit, typically 35% of the overall project fee,
+                    and then we get to work.</p>
+            </div>
+
+            <div class="asterisk-line">
+                <h3>Discover & Research</h3>
+                <p>Research is key to our design process at Public Knowledge. It helps ensure our products meet client
+                    and audience needs. The work we do at this stage lays the foundation for the project. At this stage,
+                    we focus on competitive market research, generative user research, audits, visual and functional
+                    benchmarking, as needed.</p>
+            </div>
+
+            <div class="asterisk-line">
+                <h3>Design</h3>
+                <p>In the traditional design process, we will present you with up to three visual directions. In the
+                    sprint format, we will quickly develop a single visual system direction. Based on your feedback,
+                    we’ll revise and refine the direction, scaling it to match the required deliverables. The process of
+                    designing and optimizing the information architecture will run parallel to the initial visual design
+                    phase.</p>
+            </div>
+
+            <div class="asterisk-line">
+                <h3>Handover & Support</h3>
+                <p>We finalize the deliverables and off-boarding guide. For ongoing support, we offer flexible retainer
+                    services with competitive rates and plans.</p>
+            </div>
+        </div>
+
+        <div class="card top-3">
+            <h2>Services</h2>
+
+            <div class="flex-row">
+                <div class="asterisk-bullet-line">
+                    <h3>Digital Experience & Visual Design</h3>
+                    <p>
+                        Websites
+                        <br>iOS & Android Apps
+                        <br>Interactive Data Visualizations
+                        <br>Usability Testing
+                        <br>Framer Microsites
+                        <br>Brand Identity
+                        <br>Design System
+
+                    </p>
+                </div>
+
+                <div class="asterisk-bullet-line">
+                    <h3>Strategy + Research</h3>
+                    <p>
+                        Generative Research
+                        <br>Information Architecture
+                        <br>User Research
+                        <br>Stakeholder Workshop Design
+                        <br>Product Strategy
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <footer>
+            Public Knowledge Studio 2024
+        </footer>
 
         <script>
             window.addEventListener('load', function () {
