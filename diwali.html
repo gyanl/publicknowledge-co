@@ -18,27 +18,27 @@
             --circle-color: #620E0E;
 
             /* Sizes */
-            --circle-size: 30px;
-            --circle-border-width: 2px;
-            --arm-length: 300px;
-            --number-of-circles: 10;
+            --circle-size: 40px;
+            --circle-border-width: 1px;
+            --arm-length: 320px;
+            --number-of-circles: 4;
 
             /* Animation timings */
-            --main-rotation-duration: 24s;
-            --spawn-delay-between-arms: 1s;
-            --spawn-delay-between-circles: .1s;
-            --circle-appear-duration: 1s;
+            --main-rotation-duration: 32s;
+            --spawn-delay-between-arms: .1s;
+            --spawn-delay-between-circles: .2s;
+            --circle-appear-duration: 3s;
 
             /* Animation properties */
-            --scale-min: 1.6;
-            --scale-max: 2;
+            --scale-min: 1.2;
+            --scale-max: 1.4;
             --initial-scale: 0.1;
             --final-scale: 1;
             --initial-opacity: 0;
             --final-opacity: 1;
 
             /* Calculated values */
-            --circle-overlap: -2px;
+            --circle-overlap: -120px;
             --arm-offset: calc(var(--arm-length) / -2);
         }
 
@@ -54,7 +54,6 @@
             font-family: "Geist";
             font-weight: 140;
             font-size: 24px;
-            line-height: .85;
             color: var(--yellow);
         }
 
@@ -80,7 +79,7 @@
             height: var(--circle-size);
             background: var(--circle-color);
             border-radius: 50%;
-            margin: 0;
+            margin: -8px;
             opacity: var(--initial-opacity);
             animation: appearAndExpand var(--circle-appear-duration) ease-out infinite;
         }
@@ -208,6 +207,10 @@
             display: flex;
             justify-content: space-between;
             padding: 20px;
+            flex-direction: column;
+            line-height: .6;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
         .right {
@@ -239,7 +242,9 @@
 
         .section{
             border-top: 2px solid var(--yellow);
-        }
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;}
     </style>
 </head>
 
