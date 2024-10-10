@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="https://geistfont.vercel.app/geist.css">
+
+    <style>
+        /* Customizable variables */
+        :root {
+            /* Colors */
+            --yellow: #FFF500;
+            --pink: #FD5DCE;
+            --orange: #FD6731;
+            --green: #26D27C;
+            --background-color-1: var(--pink);
+            --background-color-2: var(--orange);
+            --circle-color: #620E0E;
+
+            /* Sizes */
+            --circle-size: 30px;
+            --circle-border-width: 2px;
+            --arm-length: 300px;
+            --number-of-circles: 10;
+
+            /* Animation timings */
+            --main-rotation-duration: 24s;
+            --spawn-delay-between-arms: 1s;
+            --spawn-delay-between-circles: .1s;
+            --circle-appear-duration: 1s;
+
+            /* Animation properties */
+            --scale-min: 1.6;
+            --scale-max: 2;
+            --initial-scale: 0.1;
+            --final-scale: 1;
+            --initial-opacity: 0;
+            --final-opacity: 1;
+
+            /* Calculated values */
+            --circle-overlap: -2px;
+            --arm-offset: calc(var(--arm-length) / -2);
+        }
+
+        body {
+            margin: 0;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            background: url('splatter.jpg');
+            background-repeat: repeat-y;
+            background-size: 100%;
+            overflow: hidden;
+            font-family: "Geist";
+            font-weight: 140;
+            font-size: 24px;
+            line-height: .85;
+            color: var(--yellow);
+        }
+
+        .pattern {
+            position: relative;
+            width: 0;
+            height: 0;
+            animation: fireworkRotate var(--main-rotation-duration) ease-in-out infinite;
+        }
+
+        .line {
+            position: absolute;
+            height: var(--circle-size);
+            width: var(--arm-length);
+            display: flex;
+            transform-origin: center;
+            left: var(--arm-offset);
+            gap: var(--circle-overlap);
+        }
+
+        .circle {
+            width: var(--circle-size);
+            height: var(--circle-size);
+            background: var(--circle-color);
+            border-radius: 50%;
+            margin: 0;
+            opacity: var(--initial-opacity);
+            animation: appearAndExpand var(--circle-appear-duration) ease-out infinite;
+        }
+
+        /* Generate 8 arms with even spacing */
+        .line {
+            --angle: calc(360deg / 8);
+        }
+
+        .line:nth-child(1) {
+            transform: rotate(calc(var(--angle) * 0));
+        }
+
+        .line:nth-child(2) {
+            transform: rotate(calc(var(--angle) * 1));
+        }
+
+        .line:nth-child(3) {
+            transform: rotate(calc(var(--angle) * 2));
+        }
+
+        .line:nth-child(4) {
+            transform: rotate(calc(var(--angle) * 3));
+        }
+
+        .line:nth-child(5) {
+            transform: rotate(calc(var(--angle) * 4));
+        }
+
+        .line:nth-child(6) {
+            transform: rotate(calc(var(--angle) * 5));
+        }
+
+        .line:nth-child(7) {
+            transform: rotate(calc(var(--angle) * 6));
+        }
+
+        .line:nth-child(8) {
+            transform: rotate(calc(var(--angle) * 7));
+        }
+
+        /* Staggered animation delays */
+        .line:nth-child(1) .circle {
+            --delay: calc(0 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(2) .circle {
+            --delay: calc(1 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(3) .circle {
+            --delay: calc(2 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(4) .circle {
+            --delay: calc(3 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(5) .circle {
+            --delay: calc(4 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(6) .circle {
+            --delay: calc(5 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(7) .circle {
+            --delay: calc(6 * var(--spawn-delay-between-arms));
+        }
+
+        .line:nth-child(8) .circle {
+            --delay: calc(7 * var(--spawn-delay-between-arms));
+        }
+
+        .circle {
+            animation-delay: calc(var(--delay) + (var(--i) * var(--spawn-delay-between-circles)));
+        }
+
+        @keyframes appearAndExpand {
+            0% {
+                opacity: var(--initial-opacity);
+                transform: scale(var(--initial-scale));
+                border: var(--circle-border-width) solid var(--yellow);
+
+            }
+
+            50% {
+                opacity: var(--final-opacity);
+                transform: scale(var(--final-scale));
+                border: var(--circle-border-width) solid var(--green);
+
+            }
+
+            100% {
+                opacity: var(--initial-opacity);
+                transform: scale(var(--initial-scale));
+                border: var(--circle-border-width) solid var(--yellow);
+
+            }
+        }
+
+        @keyframes fireworkRotate {
+            0% {
+                transform: rotate(0deg) scale(var(--scale-min));
+            }
+
+            25% {
+                transform: rotate(90deg) scale(var(--scale-max));
+            }
+
+            50% {
+                transform: rotate(180deg) scale(var(--scale-min));
+            }
+
+            75% {
+                transform: rotate(270deg) scale(var(--scale-max));
+            }
+
+            100% {
+                transform: rotate(360deg) scale(var(--scale-min));
+            }
+        }
+
+        .top-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .bottom-content {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            font-size: 40px;
+            line-height: 1.4;
+            margin-top: 0 margin-bottom: 0;
+        }
+
+        .bottom-content p {
+            border-top: 2px solid var(--yellow);
+            margin-block-start: 0 !important;
+            margin-block-end: 0 !important;
+        }
+
+        .section{
+            border-top: 2px solid var(--yellow);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-content">
+
+        <div class="section">
+            <div class="left">
+                <p>SAMOSAS AND PAKORAS</p>
+            </div>
+            <div class="right">
+                <p>&OTHER SNACKS</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="left">
+                <p>@ CASA CHAUCIAO</p>
+            </div>
+            <div class="right">
+                <p>ON GMAPS</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="left">
+                <p>GET BOOZE AND FLOWERS</p>
+            </div>
+            <div class="right">
+                <p>NO PARKING</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pattern">
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <!-- Repeated for all 8 arms -->
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+        <div class="line">
+            <div class="circle" style="--i: 0"></div>
+            <div class="circle" style="--i: 1"></div>
+            <div class="circle" style="--i: 2"></div>
+            <div class="circle" style="--i: 3"></div>
+            <div class="circle" style="--i: 4"></div>
+            <div class="circle" style="--i: 5"></div>
+            <div class="circle" style="--i: 6"></div>
+            <div class="circle" style="--i: 7"></div>
+        </div>
+    </div>
+
+    <div class="bottom-content">
+        <div class="center">
+            <p>PRE DIWALI TEEN PATTI </p>
+            <p>18/OCTOBER/2024</p>
+            <p>8:30 PM ONWARDS</p>
+            <p></p>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
