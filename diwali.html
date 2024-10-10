@@ -4,6 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://geistfont.vercel.app/geist.css">
+    <meta name="apple-mobile-web-app-status-bar-style" content="FD6731">
+    <meta name="theme-color" content="#FD6731">
 
     <style>
         /* Customizable variables */
@@ -219,10 +221,12 @@
 
         .right {
             text-align: right;
+            padding-left: 8px;
         }
 
         .left {
             text-align: left;
+            padding-right: 8px;
         }
 
         .center {
@@ -245,14 +249,26 @@
         }
 
         .section {
-            border-top: 2px solid var(--yellow);
+            border-bottom: 2px solid var(--yellow);
             display: flex;
             flex-direction: row;
             justify-content: space-between;
         }
 
-        a{
+        a {
             color: var(--yellow);
+        }
+
+        .button {
+            background-color: var(--yellow);
+            color: #000;
+            border-radius: 6px;
+            padding: 11px 12px 10px 12px;
+            font-size: 14px;
+            width: fit-content;
+            margin-bottom: 10px;
+            display: inline-block;
+            font-weight: 105;
         }
 
 
@@ -260,8 +276,9 @@
         @media (max-width: 500px) {
             body {
                 background: url('splatter-mobile.jpg');
-                background-repeat: repeat-y;
-                background-size: 100%;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
             }
 
             .top-content {
@@ -286,6 +303,15 @@
     <div class="top-content">
 
         <div class="section">
+            <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0D%0AVERSION:2.0%0D%0ABEGIN:VEVENT%0D%0AUID:uid1@example.com%0D%0ADTSTAMP:20241018T150000Z%0D%0AORGANIZER;CN=Casa%20Chauciao%0D%0ADTSTART:20241018T150000Z%0D%0ADTEND:20241018T173000Z%0D%0ASUMMARY:Pre%20Diwali%20Teen%20Patti%0D%0ALOCATION:Casa%20Chauciao%0D%0ADESCRIPTION:Top%20Floor%20Barsati,%209203A,%20C9%20Vasant%20Kunj,%20New%20Delhi%20https://maps.app.goo.gl/KUQ3bacxSaG1eD8D6%0D%0AEND:VEVENT%0D%0AEND:VCALENDAR" download="event.ics">
+                <div class="button">Add to Calendar &#8599;</div>
+            </a>
+            <a href="https://maps.app.goo.gl/KUQ3bacxSaG1eD8D6">
+                <div class="button">Google Maps &#8599;</div>
+            </a>
+        </div>
+
+        <div class="section">
             <div class="left">
                 <p>SAMOSAS AND PAKORAS</p>
             </div>
@@ -295,18 +321,15 @@
         </div>
 
         <div class="section">
-            
-            <a href="https://maps.app.goo.gl/KUQ3bacxSaG1eD8D6">
+
             <div class="left">
                 <p>@ CASA CHAUCIAO</p>
             </div>
-        </a>
-        <a href="https://maps.app.goo.gl/KUQ3bacxSaG1eD8D6">
+
 
             <div class="right">
-                <p>ON GMAPS&#8599;</p>
+                <p>9203A, C9 VASANT KUNJ</p>
             </div>
-        </a>
         </div>
 
         <div class="section">
@@ -316,9 +339,6 @@
             <div class="right">
                 <p>NO PARKING</p>
             </div>
-        </div>
-
-        <div class="section">
         </div>
 
     </div>
