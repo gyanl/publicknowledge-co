@@ -26,9 +26,9 @@
             --number-of-circles: 4;
 
             /* Animation timings */
-            --main-rotation-duration: 32s;
+            --main-rotation-duration: 40s;
             --spawn-delay-between-arms: .1s;
-            --spawn-delay-between-circles: .2s;
+            --spawn-delay-between-circles: .1s;
             --circle-appear-duration: 3s;
 
             /* Animation properties */
@@ -212,11 +212,12 @@
             line-height: .6;
             margin-top: 0;
             margin-bottom: 0;
+            z-index: 10;
         }
 
         .top-content p {
-            margin-block-start: 6px !important;
-            margin-block-end: 6px !important;
+            margin-block-start: 10px !important;
+            margin-block-end: 10px !important;
         }
 
         .right {
@@ -234,6 +235,7 @@
         }
 
         .bottom-content {
+            z-index: 10;
             display: flex;
             justify-content: flex-end;
             padding: 20px;
@@ -316,7 +318,7 @@
                 <p>SAMOSAS AND PAKORAS</p>
             </div>
             <div class="right">
-                <p>&OTHER SNACKS</p>
+                <p>& OTHER SNACKS</p>
             </div>
         </div>
 
@@ -435,7 +437,6 @@
             <p></p>
         </div>
     </div>
-
 
 </body>
 
