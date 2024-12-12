@@ -34,9 +34,12 @@
             --logo-size: 1024px;
             --logo-offset: -512px;  
    
-            --logo-size-mobile: 200px;
-            --logo-offset-mobile-x: 20px;
-            --logo-offset-mobile-y: -100px;
+            --logo-size-mobile: 80px;
+            --logo-offset-mobile-l: 20px;
+
+            --logo-offset-mobile-r: 0;
+
+            --logo-offset-mobile-t: 0;
         }
 
         h1,
@@ -278,9 +281,9 @@
             position: absolute;
             height: var(--logo-size-mobile);
             width: var(--logo-size-mobile);
-            left: var(--logo-offset-mobile-x);
-            right: 0;
-            top: var(--logo-offset-mobile-y);
+            right: var(--logo-offset-mobile-r);
+            top: var(--logo-offset-mobile-t);
+            left: var(--logo-offset-mobile-l);
             opacity: 0;
             transition: 1s;
             scale: 40;
@@ -292,7 +295,7 @@
 
             header {
                 width: calc(100vw - 48px);
-                margin: 200px 0 20px 20px;
+                margin: 140px 0 20px 20px;
                 padding: 0;
                 gap: 12px;
             }
