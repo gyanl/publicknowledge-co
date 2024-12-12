@@ -34,9 +34,9 @@
             --logo-size: 1024px;
             --logo-offset: -512px;  
    
-            --logo-size-mobile: 300px;
-            --logo-offset-mobile-x: -150px;
-            --logo-offset-mobile-y: -150px;
+            --logo-size-mobile: 200px;
+            --logo-offset-mobile-x: 20px;
+            --logo-offset-mobile-y: -100px;
         }
 
         h1,
@@ -278,7 +278,8 @@
             position: absolute;
             height: var(--logo-size-mobile);
             width: var(--logo-size-mobile);
-            right: var(--logo-offset-mobile-x);
+            left: var(--logo-offset-mobile-x);
+            right: 0;
             top: var(--logo-offset-mobile-y);
             opacity: 0;
             transition: 1s;
