@@ -30,12 +30,6 @@
             --text-reg: #3A3A3A;
             --background-color: #f5f3f1;
             --background-color-dark: #ece4dc;
-
-            --logo-size: 1024px;
-            --logo-offset: -512px;  
-   
-            --logo-size-mobile: 200px;
-            --logo-offset-mobile: -100px;
         }
 
         h1,
@@ -78,9 +72,9 @@
         }
 
         .uncard {
-            width: 400px;
+            width: 720px;
             margin: auto;
-            padding: 20px 320px 2px 0;
+            padding: 20px 0 2px 0;
         }
 
         .flex-row {
@@ -152,22 +146,15 @@
 
 
         #logo {
-            position: absolute;
-            height: var(--logo-size);
-            width: var(--logo-size);
-            right: var(--logo-offset);
-            top: var(--logo-offset);
             opacity: 0;
             transition: 1s;
             scale: 40;
         }
 
         .logo-text {
-            margin-top: 200px;
             font-family: 'Shippori Antique';
-            font-size: 96px;
-            line-height: .9;
-            letter-spacing: -0.06em;
+            font-size: 24px;
+            line-height: 1.2;
         }
 
         @keyframes spin {
@@ -181,7 +168,7 @@
         }
 
         .spinny {
-            animation: spin 10s linear infinite;
+            animation: spin 5s linear infinite;
         }
 
         .vcenter {
@@ -273,24 +260,13 @@
 
         @media (max-width: 800px) {
 
-            #logo {
-            position: absolute;
-            height: var(--logo-size-mobile);
-            width: var(--logo-size-mobile);
-            right: var(--logo-offset-mobile);
-            top: var(--logo-offset-mobile);
-            opacity: 0;
-            transition: 1s;
-            scale: 40;
-        }
-
             body {
                 font-size: 14px;
             }
 
             header {
                 width: calc(100vw - 48px);
-                margin: 20px 0 20px 20px;
+                margin: 20px 0 20px 10px;
                 padding: 0;
                 gap: 12px;
             }
@@ -317,8 +293,6 @@
 
             .logo-text {
                 font-size: 24px;
-                margin: 0px;
-                padding: 0px;
             }
 
             .card-stack {
@@ -362,7 +336,7 @@
 <body>
 
     <header>
-        <img id="logo" class="spinny" src="pkstar2.svg" alt="Public Knowledge logo">
+        <img id="logo" class="spinny" src="pkstar.svg" alt="Public Knowledge logo">
         <span class="logo-text fadeInUp-1">Public<br>Knowledge<br>Studio</span>
     </header>
 
@@ -457,6 +431,40 @@
 
         </div>
 
+        <div class="card top-4">
+            <h2>Team</h2>
+
+            <div class="flex-row">
+                <div class="asterisk-bullet-line">
+                    <h3>Charu Pragya</h3>
+                    <p>
+                        Research
+                    </p>
+                </div>
+
+                <div class="asterisk-bullet-line">
+                    <h3>Gyan Lakhwani</h3>
+                    <p>
+                        Research
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex-row">
+                <div class="asterisk-bullet-line">
+                    <h3>Namita Sunil</h3>
+                        <p>Research
+                    </p>
+                </div>
+
+                <div class="asterisk-bullet-line">
+                    <h3>Ravee Deshpande</h3>
+                    <p>
+                        Research
+                    </p>
+                </div>
+            </div>
+        </div>
 
         <footer>
             Public Knowledge Studio 2024

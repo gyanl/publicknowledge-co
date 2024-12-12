@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap');
+
+:root {
+    --color-background: #f5f3f1;
+    --color-foreground: #ffffff;
+    --color-brand: #FF0000;
+    --text-dark: #3A3A3A;
+    --text-medium: #666666;
+    --text-light: #999999;
+    --color-outline: #dbdfdf;
+
+}
+
+body {
+    background-color: var(--color-background);
+    font-family: 'Work Sans', sans-serif;
+    margin: 0;
+    line-height: 1.4;
+}
+
+
+.slide {
+    display: flex;
+    height: 100vh;
+    overflow-y: auto;
+    justify-content: ;
+}
+
+.section-left {
+    max-width: 300px;
+    flex-grow: 1;
+    margin: 32px 50px;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.section-right {
+    flex-grow: 4;
+}
+
+.section img{
+    max-width: 100%;
+}
+
+.tag-container {
+    margin-left: -2px;
+}
+
+.tag {
+    background-color: var(--color-foreground);
+    color: var(--text-medium);
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--color-outline);
+    display: inline-block;
+    margin: 4px 0;
+}
+
+
+.color-tile {
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.color-tile-item {
+    width: 80px;
+    height: 20px;
+}
+
+.color-z1 {
+    background-color: #AEC0AD;
+}
+
+.color-z2 {
+    background-color: #F5F880;
+}
+
+.color-z3 {
+    background-color: #D8CDAC;
+}
+
+.color-z4 {
+    background-color: #A68FEA;
+}
+
+
+.color-z5 {
+    background-color: #FFE4CB;
+}
+
+.project-container{
+    margin-right: 20px;
+}
+
+.project{
+    background-color: var(--color-foreground);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 20px 0;
+}
+
+.project-title{
+
+}
+
+.project-gallery{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 20px;
+
+}
+
+@media screen and (max-width: 768px) {
+    .slide {
+        flex-direction: column;
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .section-left, .section-right {
+        padding: 20px;
+    }
+
+    .project-container {
+        margin-right: 0;
+    }
+
+    .project {
+        margin: 15px 0;
+    }
+
+    .tag-container {
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        margin-bottom: 10px;
+    }
+
+    .color-tile {
+        justify-content: flex-start;
+    }
+
+    .color-tile-item {
+        width: 60px;
+        height: 15px;
+        margin-right: 10px;
+    }
+}
