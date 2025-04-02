@@ -1,21 +1,19 @@
 const armsInput = document.getElementById('arms');
 const lengthInput = document.getElementById('length');
 const widthInput = document.getElementById('width');
-const lineStyleInput = document.getElementById('line-style');
+const roundedInput = document.getElementById('rounded');
 const offsetInput = document.getElementById('offset');
-const midpointPosInput = document.getElementById('midpoint-pos');
-const midpointOffsetInput = document.getElementById('midpoint-offset');
 const linesGroup = document.getElementById('asterisk-lines');
 const maskSvg = document.getElementById('mask-svg');
 const speedInput = document.getElementById('speed');
-const webcamToggle = document.getElementById('webcam-toggle');
-const video = document.querySelector('video');
+const video = document.getElementById('masked-video');
 let centerX, centerY, radius;
 let isSpinning = true;
-let isWebcamActive = false;
-let webcamStream = null;
 let initialLength = 35;
 let initialWidth = 10;
+
+// Initialize video source
+video.src = 'your-video.mp4';
 
 // Add this debounce function at the top of the file
 function debounce(func, wait) {
@@ -46,11 +44,9 @@ function handleMouseMove(e) {
   const offsetY = ((e.clientY / window.innerHeight) * 200) - 100;
   
   // Update the inputs and their displays
-  midpointPosInput.value = Math.round(posX);
-  midpointOffsetInput.value = Math.round(offsetY);
+  offsetInput.value = Math.round(posX);
   
-  updateValue(midpointPosInput, '%');
-  updateValue(midpointOffsetInput, 'px');
+  updateValue(offsetInput, '%');
   
   updateAsterisk();
 }
@@ -72,45 +68,6 @@ function handleScroll() {
   updateAsterisk();
 }
 
-// Add mouse move event listener
-window.addEventListener('mousemove', handleMouseMove);
-
-async function initializeWebcam() {
-  try {
-    webcamStream = await navigator.mediaDevices.getUserMedia({ 
-      video: { 
-        facingMode: 'user',
-        width: { ideal: 1920 },
-        height: { ideal: 1080 }
-      } 
-    });
-    video.srcObject = webcamStream;
-    isWebcamActive = true;
-    webcamToggle.textContent = 'Use Video File';
-  } catch (err) {
-    console.error('Error accessing webcam:', err);
-    alert('Could not access webcam. Please make sure you have granted camera permissions.');
-  }
-}
-
-function stopWebcam() {
-  if (webcamStream) {
-    webcamStream.getTracks().forEach(track => track.stop());
-    webcamStream = null;
-    isWebcamActive = false;
-    webcamToggle.textContent = 'Use Webcam';
-    video.src = 'your-video.mp4';
-  }
-}
-
-webcamToggle.addEventListener('click', async () => {
-  if (!isWebcamActive) {
-    await initializeWebcam();
-  } else {
-    stopWebcam();
-  }
-});
-
 function updateDimensions() {
   centerX = window.innerWidth / 2;
   centerY = window.innerHeight / 2;
@@ -126,10 +83,8 @@ function updateAsterisk() {
   const arms = parseInt(armsInput.value);
   const lengthPercent = parseInt(lengthInput.value) / 100;
   const strokeWidth = parseInt(widthInput.value);
-  const lineStyle = lineStyleInput.value;
+  const lineStyle = roundedInput.checked ? 'round' : 'butt';
   const offset = parseInt(offsetInput.value);
-  const midpointPos = parseInt(midpointPosInput.value) / 100;
-  const midpointOffset = parseInt(midpointOffsetInput.value);
   
   linesGroup.setAttribute('stroke-width', strokeWidth);
   linesGroup.setAttribute('stroke-linecap', lineStyle);
@@ -143,18 +98,9 @@ function updateAsterisk() {
     const endX = centerX + (radius * lengthPercent) * Math.cos(angle);
     const endY = centerY + (radius * lengthPercent) * Math.sin(angle);
     
-    // Calculate midpoint position
-    const midX = startX + (endX - startX) * midpointPos;
-    const midY = startY + (endY - startY) * midpointPos;
-    
-    // Calculate perpendicular offset for midpoint
-    const perpAngle = angle + Math.PI / 2;
-    const offsetX = midX + midpointOffset * Math.cos(perpAngle);
-    const offsetY = midY + midpointOffset * Math.sin(perpAngle);
-    
     // Create path for curved line
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    const d = `M ${startX} ${startY} Q ${offsetX} ${offsetY} ${endX} ${endY}`;
+    const d = `M ${startX} ${startY} L ${endX} ${endY}`;
     path.setAttribute('d', d);
     path.setAttribute('fill', 'none');
     linesGroup.appendChild(path);
@@ -184,13 +130,15 @@ window.addEventListener('resize', debounce((e) => {
 
 [armsInput, lengthInput, widthInput, offsetInput].forEach(input => {
   input.addEventListener('input', () => {
-    const suffix = input.id === 'length' ? '%' : 'px';
-    updateValue(input, suffix);
+    updateValue(input);
     updateAsterisk();
   });
   // Initialize value displays
-  const suffix = input.id === 'length' ? '%' : 'px';
-  updateValue(input, suffix);
+  updateValue(input);
+});
+
+roundedInput.addEventListener('change', () => {
+  updateAsterisk();
 });
 
 speedInput.addEventListener('input', () => {
@@ -199,32 +147,12 @@ speedInput.addEventListener('input', () => {
 });
 updateValue(speedInput, 's');
 
-lineStyleInput.addEventListener('change', updateAsterisk);
-
 // Add scroll event listener
 window.addEventListener('scroll', handleScroll);
+
+// Add mouse move event listener
+window.addEventListener('mousemove', handleMouseMove);
 
 // Initial setup
 updateDimensions();
 updateSpinAnimation();
-handleScroll(); // Call once to set initial values
-
-// Alternative solution using visualViewport if needed
-if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', debounce((e) => {
-        if (window.innerWidth !== lastWidth || window.innerHeight !== lastHeight) {
-            lastWidth = window.innerWidth;
-            lastHeight = window.innerHeight;
-            updateDimensions();
-        }
-    }, 250));
-} else {
-    // Fall back to window resize for browsers that don't support visualViewport
-    window.addEventListener('resize', debounce((e) => {
-        if (window.innerWidth !== lastWidth || window.innerHeight !== lastHeight) {
-            lastWidth = window.innerWidth;
-            lastHeight = window.innerHeight;
-            updateDimensions();
-        }
-    }, 250));
-}
