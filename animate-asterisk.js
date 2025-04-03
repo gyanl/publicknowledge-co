@@ -22,9 +22,6 @@ class AsteriskAnimation {
       arms: document.getElementById('arms'),
       length: document.getElementById('length'),
       width: document.getElementById('width'),
-      rounded: document.getElementById('rounded'),
-      offset: document.getElementById('offset'),
-      speed: document.getElementById('speed'),
       video: document.getElementById('masked-video'),
       videoContainer: document.getElementById('video-container'),
       clipPathWrapper: document.getElementById('clip-path-wrapper')
@@ -41,16 +38,13 @@ class AsteriskAnimation {
       centerY: 0,
       radius: 0,
       lastWidth: window.innerWidth,
-      lastHeight: window.innerHeight,
-      isSpinning: true
+      lastHeight: window.innerHeight
     };
 
     // Bind methods to preserve 'this' context
     this.handleResize = this.debounce(this.handleResize.bind(this), this.config.debounceDelay);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.updateAsterisk = this.updateAsterisk.bind(this);
-    this.updateSpinAnimation = this.updateSpinAnimation.bind(this);
 
     // Initialize the animation
     this.init();
@@ -63,7 +57,6 @@ class AsteriskAnimation {
     this.setupEventListeners();
     this.updateDimensions();
     this.updateAsterisk();
-    this.updateSpinAnimation();
     this.updateValueDisplays();
     this.setupVideoAutoplay();
   }
@@ -130,27 +123,15 @@ class AsteriskAnimation {
     window.addEventListener('resize', this.handleResize);
 
     // Input change events
-    ['arms', 'length', 'width', 'offset'].forEach(id => {
+    ['arms', 'length', 'width'].forEach(id => {
       this.elements[id].addEventListener('input', () => {
         this.updateValue(id);
         this.updateAsterisk();
       });
     });
 
-    // Rounded checkbox change event
-    this.elements.rounded.addEventListener('change', this.updateAsterisk);
-
-    // Speed input change event
-    this.elements.speed.addEventListener('input', () => {
-      this.updateValue('speed', 's');
-      this.updateSpinAnimation();
-    });
-
     // Scroll event
     window.addEventListener('scroll', this.handleScroll);
-
-    // Mouse move event
-    window.addEventListener('mousemove', this.handleMouseMove);
   }
 
   /**
@@ -163,16 +144,6 @@ class AsteriskAnimation {
       this.state.lastHeight = window.innerHeight;
       this.updateDimensions();
     }
-  }
-
-  /**
-   * Handle mouse move events
-   */
-  handleMouseMove(e) {
-    const posX = (e.clientX / window.innerWidth) * 100;
-    this.elements.offset.value = Math.round(posX);
-    this.updateValue('offset', '%');
-    this.updateAsterisk();
   }
 
   /**
@@ -214,8 +185,6 @@ class AsteriskAnimation {
       const arms = parseInt(this.elements.arms.value) || 6;
       const lengthPercent = (parseInt(this.elements.length.value) || 30) / 100;
       const width = parseInt(this.elements.width.value) || 10;
-      const offset = parseInt(this.elements.offset.value) || 0;
-      const isRounded = this.elements.rounded.checked;
       
       // Create the clip-path polygon points for the asterisk
       let points = [];
@@ -227,9 +196,9 @@ class AsteriskAnimation {
       for (let i = 0; i < arms; i++) {
         const angle = (2 * Math.PI / arms) * i;
         
-        // Calculate start point (slightly offset from center)
-        const startX = this.state.centerX + (offset * 0.5) * Math.cos(angle);
-        const startY = this.state.centerY + (offset * 0.5) * Math.sin(angle);
+        // Calculate start point (at center)
+        const startX = this.state.centerX;
+        const startY = this.state.centerY;
         
         // Calculate end point (at the full length)
         const endX = this.state.centerX + (this.state.radius * lengthPercent) * Math.cos(angle);
@@ -275,21 +244,6 @@ class AsteriskAnimation {
   }
 
   /**
-   * Update the spin animation
-   */
-  updateSpinAnimation() {
-    const wrapper = this.elements.clipPathWrapper;
-    if (!wrapper) return;
-
-    const speed = parseInt(this.elements.speed.value);
-    if (speed === 0) {
-      wrapper.style.animation = 'none';
-    } else {
-      wrapper.style.animation = `rotate ${21 - speed}s linear infinite`;
-    }
-  }
-
-  /**
    * Update the value display for an input
    */
   updateValue(inputId, suffix = '') {
@@ -303,10 +257,9 @@ class AsteriskAnimation {
    * Update all value displays
    */
   updateValueDisplays() {
-    ['arms', 'length', 'width', 'offset'].forEach(id => {
+    ['arms', 'length', 'width'].forEach(id => {
       this.updateValue(id);
     });
-    this.updateValue('speed', 's');
   }
 
   /**

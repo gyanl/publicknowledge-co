@@ -70,7 +70,7 @@ footer {
 
 .scroll-tip {
     text-align: center;
-    margin-top: 80vh;
+    margin-top: 65vh;
 }
 
 .display-none {
@@ -166,10 +166,10 @@ footer {
 }
 
 .logo-text {
-    margin-top: 75vh;
+    margin: 8px 0 0 16px;
     font-family: 'Shippori Antique';
-    font-size: 96px;
-    line-height: .9;
+    font-size: 60px;
+    line-height: 1.1;
     letter-spacing: -0.06em;
 }
 
@@ -326,8 +326,8 @@ footer {
     }
 
     .logo-text {
-        font-size: 48px;
-        margin: 0px;
+        margin-left: 12px;
+        font-size: 32px;
         padding: 0px;
     }
 
