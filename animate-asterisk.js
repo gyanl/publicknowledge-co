@@ -26,7 +26,8 @@ class AsteriskAnimation {
       offset: document.getElementById('offset'),
       speed: document.getElementById('speed'),
       video: document.getElementById('masked-video'),
-      videoContainer: document.getElementById('video-container')
+      videoContainer: document.getElementById('video-container'),
+      clipPathWrapper: document.getElementById('clip-path-wrapper')
     };
 
     // Set video source if not already set
@@ -207,34 +208,66 @@ class AsteriskAnimation {
    */
   updateAsterisk() {
     try {
-      const container = this.elements.videoContainer;
-      if (!container) return;
+      const wrapper = this.elements.clipPathWrapper;
+      if (!wrapper) return;
 
       const arms = parseInt(this.elements.arms.value) || 6;
       const lengthPercent = (parseInt(this.elements.length.value) || 30) / 100;
       const width = parseInt(this.elements.width.value) || 10;
       const offset = parseInt(this.elements.offset.value) || 0;
+      const isRounded = this.elements.rounded.checked;
       
       // Create the clip-path polygon points for the asterisk
       let points = [];
+      
+      // Add center point
+      points.push(`${this.state.centerX}px ${this.state.centerY}px`);
+      
+      // Create arms for the asterisk
       for (let i = 0; i < arms; i++) {
         const angle = (2 * Math.PI / arms) * i;
-        const startX = this.state.centerX + offset * Math.cos(angle);
-        const startY = this.state.centerY + offset * Math.sin(angle);
+        
+        // Calculate start point (slightly offset from center)
+        const startX = this.state.centerX + (offset * 0.5) * Math.cos(angle);
+        const startY = this.state.centerY + (offset * 0.5) * Math.sin(angle);
+        
+        // Calculate end point (at the full length)
         const endX = this.state.centerX + (this.state.radius * lengthPercent) * Math.cos(angle);
         const endY = this.state.centerY + (this.state.radius * lengthPercent) * Math.sin(angle);
         
-        // Add points for a line segment
-        points.push(`${startX}px ${startY}px`);
-        points.push(`${endX}px ${endY}px`);
+        // Calculate control points for the width of the arm
+        const perpAngle = angle + Math.PI / 2;
+        const halfWidth = width / 2;
+        
+        const controlX1 = startX + halfWidth * Math.cos(perpAngle);
+        const controlY1 = startY + halfWidth * Math.sin(perpAngle);
+        
+        const controlX2 = endX + halfWidth * Math.cos(perpAngle);
+        const controlY2 = endY + halfWidth * Math.sin(perpAngle);
+        
+        const controlX3 = endX - halfWidth * Math.cos(perpAngle);
+        const controlY3 = endY - halfWidth * Math.sin(perpAngle);
+        
+        const controlX4 = startX - halfWidth * Math.cos(perpAngle);
+        const controlY4 = startY - halfWidth * Math.sin(perpAngle);
+        
+        // Add points to create a filled arm
+        points.push(`${controlX1}px ${controlY1}px`);
+        points.push(`${controlX2}px ${controlY2}px`);
+        points.push(`${controlX3}px ${controlY3}px`);
+        points.push(`${controlX4}px ${controlY4}px`);
       }
       
       // Create the clip-path polygon
       const clipPath = `polygon(${points.join(', ')})`;
       
-      // Apply the clip-path
-      container.style.clipPath = clipPath;
-      container.style.webkitClipPath = clipPath;
+      // Apply the clip-path to the wrapper
+      wrapper.style.clipPath = clipPath;
+      wrapper.style.webkitClipPath = clipPath;
+      
+      // Apply the clip-path to the video container
+      this.elements.videoContainer.style.clipPath = clipPath;
+      this.elements.videoContainer.style.webkitClipPath = clipPath;
       
     } catch (error) {
       console.error('Error updating clipPath:', error);
@@ -245,14 +278,14 @@ class AsteriskAnimation {
    * Update the spin animation
    */
   updateSpinAnimation() {
-    const container = this.elements.videoContainer;
-    if (!container) return;
+    const wrapper = this.elements.clipPathWrapper;
+    if (!wrapper) return;
 
     const speed = parseInt(this.elements.speed.value);
     if (speed === 0) {
-      container.style.animation = 'none';
+      wrapper.style.animation = 'none';
     } else {
-      container.style.animation = `rotate ${21 - speed}s linear infinite`;
+      wrapper.style.animation = `rotate ${21 - speed}s linear infinite`;
     }
   }
 
