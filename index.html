@@ -30,11 +30,11 @@
     <svg id="mask-svg" width="100%" height="100%" style="position: fixed; top: 0; left: 0; pointer-events: none;">
         <defs>
             <mask id="asterisk-mask">
-                <rect width="100%" height="100%" fill="black"/>
+                <rect width="100%" height="100%" fill="black" />
                 <g id="asterisk-lines" stroke="white" fill="none" class="rotating"></g>
             </mask>
         </defs>
-        <rect width="100%" height="100%" fill="transparent"/>
+        <rect width="100%" height="100%" fill="transparent" />
     </svg>
 
     <button id="toggle-controls">Settings</button>
@@ -55,16 +55,17 @@
 
             <label for="rounded">Stroke Type</label>
             <div>
-            <input type="checkbox" id="rounded">
-            <span>Rounded</span>
-        </div>
+                <input type="checkbox" id="rounded">
+                <span>Rounded</span>
+            </div>
 
             <label for="speed">Rotation Speed: <span id="speed-value"></span></label>
             <input type="range" id="speed" min="0" max="20" value="10">
         </div>
     </div>
 
-    <video id="masked-video" autoplay playsinline loop muted style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; mask: url(#asterisk-mask); -webkit-mask: url(#asterisk-mask); z-index: 0;"></video>
+    <video id="masked-video" autoplay playsinline loop muted
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; mask: url(#asterisk-mask); -webkit-mask: url(#asterisk-mask); z-index: 0;"></video>
 
     <script src="animate-asterisk.js"></script>
 
@@ -72,7 +73,8 @@
 
     <div class="uncard">
         <span class="logo-text fadeInUp-1">Public Knowledge Studio</span>
-        <p class="sub fadeInUp-2">India-based design studio that makes technology work for humans. We specialise in interactive, hand-crafted web and app experiences that are uniquely yours.</p>
+        <p class="sub fadeInUp-2">India-based design studio that makes technology work for humans. We specialise in
+            interactive, hand-crafted web and app experiences that are uniquely yours.</p>
     </div>
 
     <div class="card-stack">
@@ -165,12 +167,75 @@
             Public Knowledge Studio 2024
         </footer>
 
-    <script>
-        document.getElementById("toggle-controls").addEventListener("click", function() {
-            document.getElementById("controls-panel").classList.toggle("display-none");
-        });
-    </script>
+        <script>
+            document.getElementById("toggle-controls").addEventListener("click", function () {
+                document.getElementById("controls-panel").classList.toggle("display-none");
+            });
+
+            // Function to copy email to clipboard
+            function copyEmail() {
+                const email = document.getElementById('email').textContent;
+                
+                // Check if the Clipboard API is available
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(email).then(() => {
+                        showCopySuccess();
+                    }).catch(err => {
+                        console.error('Failed to copy email: ', err);
+                        fallbackCopyToClipboard(email);
+                    });
+                } else {
+                    // Fallback for browsers that don't support the Clipboard API
+                    fallbackCopyToClipboard(email);
+                }
+            }
             
+            // Fallback method using document.execCommand
+            function fallbackCopyToClipboard(text) {
+                // Create a temporary textarea element
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                
+                // Make the textarea out of viewport
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                
+                // Focus and select the text
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    // Execute the copy command
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        showCopySuccess();
+                    } else {
+                        alert('Failed to copy email. Please try again.');
+                    }
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                    alert('Failed to copy email. Please try again.');
+                }
+                
+                // Remove the temporary textarea
+                document.body.removeChild(textArea);
+            }
+            
+            // Show success message
+            function showCopySuccess() {
+                const button = document.getElementById('copyemail');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                
+                // Reset button text after 2 seconds
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            }
+        </script>
+
 </body>
 
 </html>
