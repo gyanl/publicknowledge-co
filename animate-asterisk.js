@@ -13,7 +13,7 @@ let initialLength = 35;
 let initialWidth = 10;
 
 // Initialize video source
-video.src = 'your-video.mp4';
+video.src = 'radial-flowers.mp4';
 
 // Add this debounce function at the top of the file
 function debounce(func, wait) {
