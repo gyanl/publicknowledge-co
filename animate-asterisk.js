@@ -10,8 +10,8 @@ class AsteriskAnimation {
   constructor(options = {}) {
     // Default configuration
     this.config = {
-      initialLength: 35,
-      initialWidth: 10,
+      initialLength: 14,
+      initialWidth: 6,
       debounceDelay: 250,
       videoSource: 'radial-flowers.mp4',
       ...options
@@ -66,19 +66,19 @@ class AsteriskAnimation {
    */
   setupVideoAutoplay() {
     const video = this.elements.video;
-    
+
     // Log video loading status
     video.addEventListener('loadeddata', () => {
       console.log('Video loaded successfully');
     });
-    
+
     video.addEventListener('error', (e) => {
       console.error('Error loading video:', e);
     });
-    
+
     // Try to play the video, with fallback for autoplay restrictions
     const playPromise = video.play();
-    
+
     if (playPromise !== undefined) {
       playPromise.then(() => {
         console.log('Video playing successfully');
@@ -106,12 +106,12 @@ class AsteriskAnimation {
     playButton.style.border = 'none';
     playButton.style.borderRadius = '4px';
     playButton.style.cursor = 'pointer';
-    
+
     playButton.addEventListener('click', () => {
       this.elements.video.play();
       playButton.remove();
     });
-    
+
     document.body.appendChild(playButton);
   }
 
@@ -138,8 +138,8 @@ class AsteriskAnimation {
    * Handle window resize events
    */
   handleResize() {
-    if (window.innerWidth !== this.state.lastWidth || 
-        window.innerHeight !== this.state.lastHeight) {
+    if (window.innerWidth !== this.state.lastWidth ||
+      window.innerHeight !== this.state.lastHeight) {
       this.state.lastWidth = window.innerWidth;
       this.state.lastHeight = window.innerHeight;
       this.updateDimensions();
@@ -151,17 +151,23 @@ class AsteriskAnimation {
    */
   handleScroll() {
     const scrollProgress = Math.min(window.scrollY / (window.innerHeight * 2), 1);
-    
-    const newLength = this.config.initialLength + (100 - this.config.initialLength) * scrollProgress;
+
+    const newLength = this.config.initialLength + (200 - this.config.initialLength) * scrollProgress;
     const newWidth = this.config.initialWidth + (1500 - this.config.initialWidth) * scrollProgress;
-    
+
     this.elements.length.value = Math.round(newLength);
     this.elements.width.value = Math.round(newWidth);
-    
+
     this.updateValue('length', '%');
     this.updateValue('width', 'px');
-    
+
     this.updateAsterisk();
+
+    if (window.scrollY > window.innerHeight * 1.5) {
+      this.elements.videoContainer.classList.add('video-container-fix');
+    } else {
+      this.elements.videoContainer.classList.remove('video-container-fix');
+    }
   }
 
   /**
@@ -183,61 +189,61 @@ class AsteriskAnimation {
       if (!wrapper) return;
 
       const arms = parseInt(this.elements.arms.value) || 6;
-      const lengthPercent = (parseInt(this.elements.length.value) || 30) / 100;
+      const lengthPercent = (parseInt(this.elements.length.value) || 30) / 50;
       const width = parseInt(this.elements.width.value) || 10;
-      
+
       // Create the clip-path polygon points for the asterisk
       let points = [];
-      
+
       // Add center point
       points.push(`${this.state.centerX}px ${this.state.centerY}px`);
-      
+
       // Create arms for the asterisk
       for (let i = 0; i < arms; i++) {
         const angle = (2 * Math.PI / arms) * i;
-        
+
         // Calculate start point (at center)
         const startX = this.state.centerX;
         const startY = this.state.centerY;
-        
+
         // Calculate end point (at the full length)
         const endX = this.state.centerX + (this.state.radius * lengthPercent) * Math.cos(angle);
         const endY = this.state.centerY + (this.state.radius * lengthPercent) * Math.sin(angle);
-        
+
         // Calculate control points for the width of the arm
         const perpAngle = angle + Math.PI / 2;
         const halfWidth = width / 2;
-        
+
         const controlX1 = startX + halfWidth * Math.cos(perpAngle);
         const controlY1 = startY + halfWidth * Math.sin(perpAngle);
-        
+
         const controlX2 = endX + halfWidth * Math.cos(perpAngle);
         const controlY2 = endY + halfWidth * Math.sin(perpAngle);
-        
+
         const controlX3 = endX - halfWidth * Math.cos(perpAngle);
         const controlY3 = endY - halfWidth * Math.sin(perpAngle);
-        
+
         const controlX4 = startX - halfWidth * Math.cos(perpAngle);
         const controlY4 = startY - halfWidth * Math.sin(perpAngle);
-        
+
         // Add points to create a filled arm
         points.push(`${controlX1}px ${controlY1}px`);
         points.push(`${controlX2}px ${controlY2}px`);
         points.push(`${controlX3}px ${controlY3}px`);
         points.push(`${controlX4}px ${controlY4}px`);
       }
-      
+
       // Create the clip-path polygon
       const clipPath = `polygon(${points.join(', ')})`;
-      
+
       // Apply the clip-path to the wrapper
       wrapper.style.clipPath = clipPath;
       wrapper.style.webkitClipPath = clipPath;
-      
+
       // Apply the clip-path to the video container
       this.elements.videoContainer.style.clipPath = clipPath;
       this.elements.videoContainer.style.webkitClipPath = clipPath;
-      
+
     } catch (error) {
       console.error('Error updating clipPath:', error);
     }
