@@ -32,7 +32,7 @@
             z-index: 0;
             overflow: hidden;
         }
-        
+
         /* Clip-path wrapper */
         #clip-path-wrapper {
             position: absolute;
@@ -42,17 +42,18 @@
             height: 100%;
             transform-origin: center;
         }
-        
+
         /* Rotation animation for the clip-path */
         @keyframes rotate {
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
         }
-        
+
         /* Ensure the video is visible */
         #masked-video {
             display: block;
@@ -63,7 +64,7 @@
             top: 0;
             left: 0;
         }
-        
+
         /* Fix for Safari */
         @supports (-webkit-touch-callout: none) {
             #video-container {
@@ -78,8 +79,9 @@
 
     <div class="logo-text">PUBLIC<br>KNOW*<br>LEDGE</div>
 
-    
-    <div class="button" id="toggle-controls"><img src="sliders.svg" width="20px" height="20px" style="padding: 4px 1px 0 1px;"></div>
+
+    <div class="button" id="toggle-controls"><img src="sliders.svg" width="20px" height="20px"
+            style="padding: 4px 1px 0 1px;"></div>
 
     <div class="controls-panel display-none" id="controls-panel">
         <div class="control-group">
@@ -101,16 +103,17 @@
 
     <script src="animate-asterisk.js"></script>
 
-<div class="scroll-tip">
-    Scroll to Start
-</div>
-
-    <div class="uncard">
-        <p class="sub fadeInUp-2">India-based design studio that makes technology work for humans. We specialise in
-            interactive, hand-crafted web and app experiences that are uniquely yours.</p>
+    <div class="scroll-tip">
+        Scroll to Start
     </div>
 
     <div class="card-stack">
+
+        <div class="uncard fadeInUp-2">
+            <p>India-based design studio that makes technology work for humans.</p>
+            <p>We specialise in
+                interactive, hand-crafted web and app experiences that are uniquely yours.</p>
+        </div>
 
         <div class="card top-1 fadeInUp-2">
             <h2>Want to work with us?</h2>
@@ -208,7 +211,7 @@
             // Function to copy email to clipboard
             function copyEmail() {
                 const email = document.getElementById('email').textContent;
-                
+
                 // Check if the Clipboard API is available
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(email).then(() => {
@@ -222,23 +225,23 @@
                     fallbackCopyToClipboard(email);
                 }
             }
-            
+
             // Fallback method using document.execCommand
             function fallbackCopyToClipboard(text) {
                 // Create a temporary textarea element
                 const textArea = document.createElement("textarea");
                 textArea.value = text;
-                
+
                 // Make the textarea out of viewport
                 textArea.style.position = "fixed";
                 textArea.style.left = "-999999px";
                 textArea.style.top = "-999999px";
                 document.body.appendChild(textArea);
-                
+
                 // Focus and select the text
                 textArea.focus();
                 textArea.select();
-                
+
                 try {
                     // Execute the copy command
                     const successful = document.execCommand('copy');
@@ -251,17 +254,17 @@
                     console.error('Fallback: Oops, unable to copy', err);
                     alert('Failed to copy email. Please try again.');
                 }
-                
+
                 // Remove the temporary textarea
                 document.body.removeChild(textArea);
             }
-            
+
             // Show success message
             function showCopySuccess() {
                 const button = document.getElementById('copyemail');
                 const originalText = button.textContent;
                 button.textContent = 'Copied!';
-                
+
                 // Reset button text after 2 seconds
                 setTimeout(() => {
                     button.textContent = originalText;
