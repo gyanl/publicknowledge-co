@@ -162,12 +162,6 @@ class AsteriskAnimation {
     this.updateValue('width', 'px');
 
     this.updateAsterisk();
-
-    if (window.scrollY > window.innerHeight * 1.5) {
-      this.elements.videoContainer.classList.add('video-container-fix');
-    } else {
-      this.elements.videoContainer.classList.remove('video-container-fix');
-    }
   }
 
   /**
@@ -288,3 +282,5 @@ class AsteriskAnimation {
 document.addEventListener('DOMContentLoaded', () => {
   new AsteriskAnimation();
 });
+
+

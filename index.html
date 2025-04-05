@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap">
 
+    <!-- Load Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+
     <!-- Open Graph Tags -->
     <meta property="og:image" content="https://publicknowledge.co/pk-og.jpg">
     <meta property="og:image:width" content="1200">
@@ -72,7 +76,7 @@
 
     <div class="container">
 
-        <div class="huge-text">
+        <div id="animate-words" class="huge-text">
             We believe technology should feel human. We specialise in thoughtful, handcrafted digital experiences that
             help organisations turn complexity into clarity—and ideas into impact.
         </div>
@@ -127,9 +131,9 @@
             <div class="project-line">
 
                 <div class="project">
-                    <img class="project-thumbnail" src="img/hammock-thumbnail.jpg" alt="">
+                    <img class="project-thumbnail" src="img/sa-thumbnail.jpg" alt="">
                     <div class="project-title">Sa Biennale</div>
-                    <div class="project-description">One line description for Hammock Mag</div>
+                    <div class="project-description">Brand and marketing for Asia's highest land art festival.</div>
                     <div class="tag-container">
                         <div class="tag">Branding</div>
                         <div class="tag">UI/UX</div>
@@ -169,9 +173,9 @@
             <div class="project-line">
 
                 <div class="project">
-                    <img class="project-thumbnail" src="img/hammock-thumbnail.jpg" alt="">
+                    <img class="project-thumbnail" src="img/amie-thumbnail.jpg" alt="">
                     <div class="project-title">Amie</div>
-                    <div class="project-description">One line description for Hammock Mag</div>
+                    <div class="project-description">Amie began as a sartorial club that empowers members to curate a rotating wardrobe befitting multiple occasions, seasons, sizes and price points. We created their website and expanded their existing branding language.</div>
                     <div class="tag-container">
                         <div class="tag">Branding</div>
                         <div class="tag">UI/UX</div>
@@ -180,7 +184,7 @@
                 </div>
 
                 <div class="project">
-                    <img class="project-thumbnail" src="img/hammock-thumbnail.jpg" alt="">
+                    <img class="project-thumbnail" src="img/net-gala-thumbnail.jpg" alt="">
                     <div class="project-title">Net Gala</div>
                     <div class="project-description">One line description for Hammock Mag</div>
                     <div class="tag-container">
@@ -210,7 +214,7 @@
             <div class="project-line">
 
                 <div class="project">
-                    <img class="project-thumbnail" src="img/hammock-thumbnail.jpg" alt="">
+                    <img class="project-thumbnail" src="img/emotional-ai-thumbnail.jpg" alt="">
                     <div class="project-title">Emotional AI</div>
                     <div class="project-description">One line description for Hammock Mag</div>
                     <div class="tag-container">
@@ -220,20 +224,9 @@
                     </div>
                 </div>
 
-                <div class="project">
-                    <img class="project-thumbnail" src="img/hammock-thumbnail.jpg" alt="">
-                    <div class="project-title">Borkowski</div>
-                    <div class="project-description">One line description for Hammock Mag</div>
-                    <div class="tag-container">
-                        <div class="tag">Branding</div>
-                        <div class="tag">UI/UX</div>
-                        <div class="tag">Development</div>
-                    </div>
-                </div>
-
 
                 <div class="project">
-                    <img class="project-thumbnail" src="img/hammock-thumbnail.jpg" alt="">
+                    <img class="project-thumbnail" src="img/borkowski-thumbnail.jpg" alt="">
                     <div class="project-title">Borkowski</div>
                     <div class="project-description">One line description for Hammock Mag</div>
                     <div class="tag-container">
@@ -324,6 +317,89 @@
                 button.textContent = originalText;
             }, 2000);
         }
+
+    </script>
+
+    <script>
+        // Wait for DOM to be fully loaded and verify anime is available
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof window.anime === 'undefined') {
+                console.error('Anime.js library not loaded');
+                return;
+            }
+
+            // Get all huge-text elements
+            const hugeTexts = document.querySelectorAll('.huge-text');
+            
+            hugeTexts.forEach(textElement => {
+                // Split text into words and wrap each in a span
+                const text = textElement.textContent;
+                textElement.textContent = '';
+                
+                text.split('').forEach(word => {
+                    const span = document.createElement('span');
+                    span.textContent = word;
+                    span.style.opacity = '0';
+                    textElement.appendChild(span);
+                });
+
+                // Animate each character when the div is in view
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        window.anime({
+                            targets: textElement.querySelectorAll('span'),
+                            opacity: [.5, 1],
+                            duration: 140,
+                            delay: window.anime.stagger(10, {from: 10, to: 100, random: true}),
+                            easing: 'easeInOutSine'
+                        });
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(textElement);
+            });
+
+
+            // Animate every project inside project-line when it's in view
+            const projectLines = document.querySelectorAll('.project-line');
+            projectLines.forEach(projectLine => {
+                const projectItems = projectLine.querySelectorAll('.project');
+                projectItems.forEach((item, index) => {
+                    const observer = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting) {
+                            window.anime({
+                                targets: item,
+                                translateY: [20, 0],
+                                opacity: [0, 1],
+                                duration: 2000,
+                                delay: 200 + (index * 200) // Stagger each project by .5s
+                            }); 
+                            observer.disconnect();
+                        }   
+                    });
+                    observer.observe(item);
+                });
+            });
+
+            // Animate every service inside service-container when it's in view
+            const serviceContainer = document.querySelector('.service-container');
+            const serviceItems = serviceContainer.querySelectorAll('.service-card');
+            serviceItems.forEach((item, index) => {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        window.anime({
+                            targets: item,
+                            translateY: [20, 0],
+                            opacity: [0, 1],
+                            duration: 2000,
+                            delay: 200 + (index * 300) // Stagger each project by .5s
+                        });
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(item);
+            });
+        });
     </script>
 
 </body>
