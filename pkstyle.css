@@ -51,6 +51,11 @@
     --font-stack-serif: 'Copernicus', serif;
     --font-stack-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-stack-mono: 'Basier Square Mono', monospace;
+
+
+    --max-width: 1920px;
+    --width-desktop: 80vw;
+    --width-mobile: 92vw;
 }
 
 /* Ensure proper stacking context */
@@ -103,7 +108,7 @@ header {
     align-items: center;
 }
 
-footer {
+.footer {
     position: relative;
     width: 800px;
     margin: auto;
@@ -120,7 +125,7 @@ h5 {
     font-family: var(--font-stack-sans);
 }
 
-.container{
+.container {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -144,14 +149,19 @@ h5 {
 .project-line {
     display: flex;
     flex-direction: row;
-    width: 80vw;
-    max-width: 1920px;
+    width: var(--width-desktop);
+    max-width: var(--max-width);
     display: flex;
     gap: 30px;
 }
 
 .project {
     flex: 1;
+}
+
+a.project {
+    text-decoration: none;
+    color: var(--text-reg);
 }
 
 .project-title {
@@ -207,6 +217,31 @@ h5 {
     mix-blend-mode: difference;
 }
 
+.scroll-tip {
+    animation: bounce 3s infinite;
+    animation-delay: 4s;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+
 .square-button {
     font-family: var(--font-stack-mono);
     padding: 0 4px;
@@ -232,12 +267,10 @@ h5 {
 .service-container {
     display: flex;
     flex-direction: row;
-    max-width: 1920px;
-    width: 80%;
+    max-width: var(--max-width);
+    width: var(--width-desktop);
     gap: 30px;
-    width: 80vw;
     margin: 0 auto;
-    max-width: 1920px;
     padding-bottom: 100px;
 }
 
@@ -261,11 +294,11 @@ h5 {
     opacity: .85;
 }
 
-.section-title{
+.section-title {
     text-align: left;
     font-size: 24px;
-    width: 80%;
-    max-width: 1920px;
+    width: var(--width-desktop);
+    max-width: var(--max-width);
     margin: 0 auto;
 }
 
@@ -504,6 +537,65 @@ h5 {
     color: var(--text-reg);
 }
 
+
+#toggle-controls {
+    z-index: 2;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.controls-panel {
+    z-index: 2;
+    position: absolute;
+    top: 72px;
+    right: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-group input[type="range"] {
+    width: 200px;
+}
+
+.control-group input[type="checkbox"] {
+    display: inline;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    transform-origin: center;
+    animation: rotate 20s linear infinite;
+}
+
+
+
+/* Mobile Styles */
+
 @media (max-width: 800px) {
 
     #logo {
@@ -529,7 +621,7 @@ h5 {
         gap: 12px;
     }
 
-    footer {
+    .footer {
         width: calc(100vw - 48px);
         margin: 20px 0 20px 24px;
         padding: 0;
@@ -595,59 +687,27 @@ h5 {
     .project-line {
         display: flex;
         flex-direction: column;
-    }
-}
-
-#toggle-controls {
-    z-index: 2;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.controls-panel {
-    z-index: 2;
-    position: absolute;
-    top: 72px;
-    right: 28px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 3px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.control-group label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.control-group input[type="range"] {
-    width: 200px;
-}
-
-.control-group input[type="checkbox"] {
-    display: inline;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
+        width: var(--width-mobile);
     }
 
-    to {
-        transform: rotate(360deg);
+    .section-title {
+        width: var(--width-mobile);
     }
-}
 
-.rotating {
-    transform-origin: center;
-    animation: rotate 20s linear infinite;
+    .project-container {
+        width: var(--width-mobile);
+    }
+
+    .service-container {
+        width: var(--width-mobile);
+        flex-direction: column;
+    }
+
+    .service-card {
+    }
+
+    .huge-text {
+        font-size: 30px;
+        padding: 5vh 0 10vh 0;
+    }
 }
