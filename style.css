@@ -191,11 +191,21 @@ h5 {
 
 .project {
     flex: 1;
+    padding: var(--spacing-md);
+    border-radius: calc(var(--border-radius-lg) + 4px);
 }
 
 a.project {
     text-decoration: none;
     color: var(--text-reg);
+    transition: margin var(--transition-normal);
+}
+
+a.project:hover {
+    background-color: var(--slightly-warm-gray);
+    color: var(--charcoal);
+    margin-top: -4px;
+    margin-bottom: 4px;
 }
 
 .project-title {
@@ -258,6 +268,7 @@ a.project {
 }
 
 @keyframes bounce {
+
     0%,
     20%,
     50%,
@@ -298,35 +309,97 @@ a.project {
 }
 
 .service-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-2xl);
     max-width: var(--max-width);
     width: var(--width-desktop);
-    gap: var(--spacing-2xl);
     margin: 0 auto;
     padding-bottom: var(--spacing-6xl);
 }
 
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-2xl);
+    max-width: var(--max-width);
+    width: var(--width-desktop);
+    margin: 0 auto;
+    padding-bottom: var(--spacing-6xl);
+}
+
+@media (max-width: 1200px) {
+    .service-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2xl);
+    }
+    .service-name {
+
+        height: var(--spacing-4xl);
+    }
+    .team-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2xl);
+    }
+    .team-card {
+        padding: var(--spacing-2xl);
+        border-radius: var(--border-radius-lg);
+        background-color: var(--slightly-warm-gray);
+        transition: transform var(--transition-normal) ease;
+    }
+    
+}
+
+
+
+
+
 .service-card {
     padding: var(--spacing-2xl);
     border-radius: var(--border-radius-lg);
-    background-color: var(--white);
+    background-color: var(--slightly-warm-gray);
     transition: transform var(--transition-normal) ease;
-    border: 1px solid var(--black-5);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.team-card {
+    padding: var(--spacing-2xl);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--slightly-warm-gray);
+    transition: transform var(--transition-normal) ease;
+}
+
+
 .service-name {
-    font-size: var(--font-size-md);
-    height: var(--spacing-6xl);
+    font-size: var(--font-size-xl);
+    height: var(--spacing-5xl);
+}
+
+.team-name {
+    padding-top: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+    height: var(--spacing-5xl);
 }
 
 .service-description {
-    font-size: var(--font-size-lg);
-    letter-spacing: var(--letter-spacing-wide);
+    font-size: var(--font-size-md);
     font-family: var(--font-stack-sans);
     opacity: .85;
 }
+
+.team-description {
+    font-size: var(--font-size-md);
+    font-family: var(--font-stack-sans);
+    opacity: .85;
+}
+
+.team-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
 
 .section-title {
     text-align: left;
@@ -432,19 +505,20 @@ a.project {
 .logo-text {
     position: absolute;
     top: var(--spacing-2xl);
-    left: var(--spacing-md);
+    left: var(--spacing-4xl);
     font-size: var(--font-size-3xl);
     line-height: 1.1;
     letter-spacing: var(--letter-spacing-tight);
 }
 
 .top-right {
+    text-align: right;
     display: flex;
     flex-direction: column;
-    max-width: var(--container-width);
+    max-width: 300px;
     position: absolute;
     top: var(--spacing-2xl);
-    right: var(--spacing-md);
+    right: var(--spacing-xl);
     gap: var(--spacing-md);
 }
 
@@ -745,9 +819,15 @@ textarea {
         bottom: 0;
     }
 
+    .project-container {
+        width: var(--width-mobile);
+        gap: var(--spacing-4xl);
+    }
+
     .project-line {
         flex-direction: column;
         width: var(--width-mobile);
+        gap: var(--spacing-4xl);
     }
 
     .project-title {
@@ -763,16 +843,20 @@ textarea {
         font-size: var(--font-size-lg);
     }
 
-    .project-container {
-        width: var(--width-mobile);
-    }
+
 
     .service-container {
+        display: flex;
+        flex-direction: row;
         width: var(--width-mobile);
         flex-direction: column;
     }
 
-    .service-card {
+    .team-container {
+        display: flex;
+        flex-direction: row;
+        width: var(--width-mobile);
+        flex-direction: column;
     }
 
     .huge-text {
@@ -787,4 +871,3 @@ textarea {
         gap: var(--spacing-md);
     }
 }
-
