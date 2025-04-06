@@ -92,6 +92,22 @@
     --transition-slow: 1s;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Colors - Dark Theme */
+        --text-reg: #E8E8E8;
+        --background-color: #1a1a1a;
+        --background-color-dark: #2A2A2A;
+        --slightly-warm-gray: #2C2C2C;
+        --charcoal: #E8E8E8;
+        --black-5: rgba(255, 255, 255, 0.1);
+        --white: #1A1A1A;
+        --card-background: #2A2A2A;
+        --card-border: rgba(255, 255, 255, 0.1);
+        --card-shadow: rgba(0, 0, 0, 0.2);
+    }
+}
+
 /* Ensure proper stacking context */
 #video-container {
     width: 100%;
