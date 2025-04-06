@@ -26,36 +26,70 @@
 }
 
 :root {
+    /* Colors */
     --primary-color: #FF0000;
     --secondary-color: #00FF00;
     --accent-color: #0000FF;
-    --text-reg: #3A3A3A;
+    --text-reg: #2A2A2A;
     --background-color: #F5F3F1;
     --background-color-dark: #ece4dc;
-
     --slightly-warm-gray: #EFEEEC;
-    --charcoal: #3A3A3A;
+    --charcoal: #2A2A2A;
+    --black-5: rgba(0, 0, 0, .1);
+    --white: #FFFFFF;
+    --focus-outline: 2px solid var(--accent-color);
+    --focus-outline-offset: 2px;
 
-    --black-5: rgba(0, 0, 0, .05);
-
-    --logo-size: 1024px;
-    --logo-offset: -512px;
-
-    --logo-size-mobile: 80px;
-    --logo-offset-mobile-l: 20px;
-
-    --logo-offset-mobile-r: 0;
-
-    --logo-offset-mobile-t: 0;
-
+    /* Typography */
     --font-stack-serif: 'Copernicus', serif;
     --font-stack-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-stack-mono: 'Basier Square Mono', monospace;
+    --font-size-base: 1em;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 28px;
+    --font-size-3xl: 32px;
+    --font-size-4xl: 48px;
+    --line-height-base: 1.4;
+    --line-height-tight: 1.3;
+    --letter-spacing-tight: -0.06em;
+    --letter-spacing-wide: 0.05em;
 
-
+    /* Layout */
     --max-width: 1920px;
     --width-desktop: 80vw;
     --width-mobile: 92vw;
+    --container-width: 800px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 30px;
+    --spacing-3xl: 40px;
+    --spacing-4xl: 45px;
+    --spacing-5xl: 80px;
+    --spacing-6xl: 100px;
+
+    /* Logo */
+    --logo-size: 1024px;
+    --logo-offset: -512px;
+    --logo-size-mobile: 80px;
+    --logo-offset-mobile-l: 20px;
+    --logo-offset-mobile-r: 0;
+    --logo-offset-mobile-t: 0;
+
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 10px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 1s;
 }
 
 /* Ensure proper stacking context */
@@ -90,9 +124,9 @@
 /* Add your CSS code here */
 body {
     font-family: var(--font-stack-serif);
-    font-size: 1em;
+    font-size: var(--font-size-base);
     margin: 0;
-    line-height: 1.4;
+    line-height: var(--line-height-base);
     padding: 0;
     color: var(--text-reg);
     background-color: var(--background-color);
@@ -101,19 +135,19 @@ body {
 header {
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    width: 800px;
+    gap: var(--spacing-lg);
+    width: var(--container-width);
     margin: auto;
-    padding: 40px 0 2px 0;
+    padding: var(--spacing-3xl) 0 var(--spacing-xs) 0;
     align-items: center;
 }
 
 .footer {
     position: relative;
-    width: 800px;
+    width: var(--container-width);
     margin: auto;
     text-align: center;
-    padding: 40px 0;
+    padding: var(--spacing-3xl) 0;
 }
 
 h1,
@@ -130,10 +164,10 @@ h5 {
     display: flex;
     flex-direction: column;
     background-color: var(--background-color);
-    padding: 80px 0 0 0;
+    padding: var(--spacing-5xl) 0 0 0;
     margin: 120vh 0 auto 0;
     z-index: 10;
-    gap: 45px;
+    gap: var(--spacing-4xl);
 }
 
 .project-container {
@@ -143,7 +177,7 @@ h5 {
     align-items: center;
     margin: 0 auto;
     z-index: 10;
-    gap: 45px;
+    gap: var(--spacing-4xl);
 }
 
 .project-line {
@@ -151,8 +185,7 @@ h5 {
     flex-direction: row;
     width: var(--width-desktop);
     max-width: var(--max-width);
-    display: flex;
-    gap: 30px;
+    gap: var(--spacing-2xl);
 }
 
 .project {
@@ -165,46 +198,47 @@ a.project {
 }
 
 .project-title {
-    margin-top: 12px;
+    margin-top: var(--spacing-md);
     font-family: var(--font-stack-sans);
-    font-size: 28px;
+    font-size: var(--font-size-2xl);
 }
 
 .project-description {
-    font-size: 20px;
-    padding: 6px 0 12px 0;
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-xs) 0 var(--spacing-md) 0;
 }
 
 .project-thumbnail {
-    border-radius: 10px;
+    border-radius: var(--border-radius-lg);
     width: 100%;
     object-fit: cover;
 }
 
 .tag-container {
     display: flex;
-    gap: 8px;
+    gap: var(--spacing-sm);
     margin-left: -2px;
 }
 
 .tag {
     text-transform: uppercase;
-    font-size: 14px;
-    padding: 4px 12px;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
     display: inline-block;
     background-color: var(--black-5);
     font-family: var(--font-stack-mono);
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
+    color: var(--text-reg);
 }
 
 .huge-text {
-    font-size: 48px;
+    font-size: var(--font-size-4xl);
     padding-right: 30vw;
     padding-left: 10vw;
-    padding-bottom: 100px;
-    padding-top: 100px;
-    letter-spacing: -.06em;
-    line-height: 1.3;
+    padding-bottom: var(--spacing-6xl);
+    padding-top: var(--spacing-6xl);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
 }
 
 .scroll-tip {
@@ -213,8 +247,7 @@ a.project {
     text-align: center;
     margin-top: 85vh;
     z-index: 0;
-    color: #fff;
-    mix-blend-mode: difference;
+    color: var(--text-reg);
 }
 
 .scroll-tip {
@@ -223,7 +256,6 @@ a.project {
 }
 
 @keyframes bounce {
-
     0%,
     20%,
     50%,
@@ -241,11 +273,10 @@ a.project {
     }
 }
 
-
 .square-button {
     font-family: var(--font-stack-mono);
-    padding: 0 4px;
-    transition: padding 0.2s ease;
+    padding: 0 var(--spacing-xs);
+    transition: padding var(--transition-fast);
 }
 
 .square-button::before {
@@ -269,34 +300,35 @@ a.project {
     flex-direction: row;
     max-width: var(--max-width);
     width: var(--width-desktop);
-    gap: 30px;
+    gap: var(--spacing-2xl);
     margin: 0 auto;
-    padding-bottom: 100px;
+    padding-bottom: var(--spacing-6xl);
 }
 
-
 .service-card {
-    padding: 24px;
-    border-radius: 10px;
-    background-color: var(--slightly-warm-gray);
-    transition: transform 0.3s ease;
+    padding: var(--spacing-2xl);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--white);
+    transition: transform var(--transition-normal) ease;
+    border: 1px solid var(--black-5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .service-name {
-    font-size: 20px;
-    height: 60px;
+    font-size: var(--font-size-md);
+    height: var(--spacing-6xl);
 }
 
 .service-description {
-    font-size: 16px;
-    letter-spacing: .05em;
+    font-size: var(--font-size-lg);
+    letter-spacing: var(--letter-spacing-wide);
     font-family: var(--font-stack-sans);
     opacity: .85;
 }
 
 .section-title {
     text-align: left;
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     width: var(--width-desktop);
     max-width: var(--max-width);
     margin: 0 auto;
@@ -307,59 +339,57 @@ a.project {
 }
 
 .uncard {
-    font-size: 28px;
-    margin: 20px 12px;
-    margin-top: 150vh;
+    font-size: var(--font-size-2xl);
+    margin: var(--spacing-2xl) var(--spacing-md);
+    margin-top: var(--spacing-6xl);
     text-align: center;
     background-color: rgba(255, 255, 255, 0.75);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-    padding: 4px 36px;
-    max-width: 800px;
-    border-radius: 8px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    max-width: var(--container-width);
+    border-radius: var(--border-radius-md);
 }
 
 .flex-row {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: var(--spacing-3xl);
 }
 
 .card {
-    background-color: #fefefe;
+    background-color: var(--white);
     position: sticky;
-    padding: 4px 24px 24px 24px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    max-width: 800px;
-    margin: 20px 12px;
-    /* max-height: 40vh;
-    overflow-y: scroll; */
+    padding: var(--spacing-xs) var(--spacing-md) var(--spacing-md) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--black-5);
+    max-width: var(--container-width);
+    margin: var(--spacing-2xl) var(--spacing-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .card-stack {
-    width: 800px;
+    width: var(--container-width);
     margin: auto;
 }
 
 .asterisk-line h3::before {
     content: "";
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: var(--spacing-md);
+    height: var(--spacing-md);
     background-image: url(pkstar.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
     margin-bottom: -3px;
-    margin-right: 8px;
+    margin-right: var(--spacing-sm);
 }
 
 .asterisk-line p {
     border-left: 1px solid #C2C2C2;
-    margin: -21px 0 -20px 9px;
-    padding: 12px 0 32px 19px;
-
+    margin: -21px 0 -20px var(--spacing-md);
+    padding: var(--spacing-md) 0 var(--spacing-md) var(--spacing-md);
 }
 
 .asterisk-line:last-child p {
@@ -369,23 +399,22 @@ a.project {
 .asterisk-bullet-line h3::before {
     content: "";
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: var(--spacing-md);
+    height: var(--spacing-md);
     background-image: url(pkstar.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
     margin-bottom: -3px;
-    margin-right: 8px;
+    margin-right: var(--spacing-sm);
 }
 
 .asterisk-bullet-line p {
     line-height: 1.75;
     border-left: 1px solid #C2C2C2;
-    margin: 20px 0 0px 9px;
-    padding: 4px 0 4px 19px;
+    margin: var(--spacing-md) 0 0px var(--spacing-md);
+    padding: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-md);
 }
-
 
 #logo {
     position: absolute;
@@ -400,21 +429,21 @@ a.project {
 
 .logo-text {
     position: absolute;
-    top: 40px;
-    left: 32px;
-    font-size: 50px;
+    top: var(--spacing-2xl);
+    left: var(--spacing-md);
+    font-size: var(--font-size-3xl);
     line-height: 1.1;
-    letter-spacing: -0.06em;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .top-right {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    max-width: var(--container-width);
     position: absolute;
-    top: 36px;
-    right: 32px;
-    gap: 20px;
+    top: var(--spacing-2xl);
+    right: var(--spacing-md);
+    gap: var(--spacing-md);
 }
 
 @keyframes spin {
@@ -469,24 +498,6 @@ a.project {
     animation-delay: 1200ms;
 }
 
-
-
-/* .top-1 {
-    top: 20px;
-}
-
-.top-2 {
-    top: 100px;
-}
-
-.top-3 {
-    top: 180px;
-}
-
-.top-4 {
-    top: 260px;
-} */
-
 @keyframes rotateIn {
     0% {
         opacity: 0;
@@ -512,55 +523,61 @@ a.project {
 }
 
 .button {
+    position: relative;
     display: inline-block;
-    padding: 8px 12px;
-    color: #222;
-    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-reg);
+    border-radius: var(--border-radius-sm);
     background: var(--background-color);
     border: 1px solid var(--background-color-dark);
-    margin: 4px 8px 0 -2px;
+    margin: var(--spacing-xs) var(--spacing-sm) 0 -2px;
     text-decoration: none;
     width: auto;
-    transition: .2s;
+    transition: var(--transition-fast);
+    cursor: pointer;
 }
 
-.button:hover {
-    cursor: pointer;
+.button:hover,
+.button:focus {
     background: var(--background-color-dark);
     border: 1px solid var(--background-color);
     transform: translateY(1px);
 }
 
+.button:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
+}
+
 .rounded-label {
-    margin-left: 8px;
+    margin-left: var(--spacing-sm);
     font-size: 0.9em;
     color: var(--text-reg);
 }
 
-
 #toggle-controls {
     z-index: 2;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: var(--spacing-2xl);
+    right: var(--spacing-md);
 }
 
 .controls-panel {
     z-index: 2;
     position: absolute;
-    top: 72px;
-    right: 28px;
+    top: var(--spacing-6xl);
+    right: var(--spacing-md);
     background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 3px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 2px 10px var(--black-5);
     z-index: 1000;
 }
 
 .control-group {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-md);
 }
 
 .control-group label {
@@ -592,12 +609,54 @@ a.project {
     animation: rotate 20s linear infinite;
 }
 
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+/* Remove focus outline for mouse users but keep for keyboard users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
 
+:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
+}
+
+/* Improve link accessibility */
+a {
+    color: var(--text-reg);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus {
+    color: var(--accent-color);
+}
+
+a:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
+}
+
+/* Improve form control accessibility */
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/* Ensure sufficient contrast for disabled elements */
+:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
 
 /* Mobile Styles */
-
 @media (max-width: 800px) {
-
     #logo {
         position: absolute;
         height: var(--logo-size-mobile);
@@ -611,87 +670,95 @@ a.project {
     }
 
     body {
-        font-size: 14px;
+        font-size: var(--font-size-sm);
+        line-height: 1.5;
     }
 
     header {
         width: calc(100vw - 48px);
-        margin: 140px 0 20px 20px;
+        margin: 140px 0 var(--spacing-lg) var(--spacing-lg);
         padding: 0;
-        gap: 12px;
+        gap: var(--spacing-md);
     }
 
     .footer {
         width: calc(100vw - 48px);
-        margin: 20px 0 20px 24px;
+        margin: var(--spacing-lg) 0 var(--spacing-lg) var(--spacing-xl);
         padding: 0;
     }
 
     .button {
-        padding: 8px 12px;
-        margin: 8px 8px 8px -2px;
+        min-height: 44px;
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
-    /* Add your mobile-only CSS code here */
+    .logo-text {
+        margin-left: var(--spacing-md);
+        font-size: var(--font-size-2xl);
+        padding: 0px;
+    }
+
+    .card-stack {
+        margin-left: var(--spacing-xs);
+        width: calc(100vw - 48px);
+    }
+
+    .uncard {
+        width: calc(100vw - 60px);
+        font-size: var(--font-size-2xl);
+        margin: var(--spacing-6xl) 0 1px 0;
+        padding: var(--spacing-md);
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid var(--black-5);
+    }
+
+    .card {
+        width: calc(100vw - 60px);
+        padding: var(--spacing-md);
+        margin: 0 0 1px 0;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid var(--black-5);
+    }
+
+    .card-stack .card:first-child {
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    }
+
+    .card-stack .card:last-child {
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    }
+
+    .flex-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
     .container {
-        padding: 60px 30px 60px 30px;
+        padding: 0;
         position: relative;
         margin: 100px 0 0 0;
         border-radius: 0;
         bottom: 0;
     }
 
-    .logo-text {
-        margin-left: 12px;
-        font-size: 32px;
-        padding: 0px;
-    }
-
-    .card-stack {
-        margin-left: 4px;
-        width: calc(100vw - 48px);
-    }
-
-    .uncard {
-        width: calc(100vw - 60px);
-        font-size: 24px;
-        margin: 150vh 0 1px 0;
-        padding: 26px;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .card {
-        width: calc(100vw - 60px);
-        padding: 26px;
-        margin: 0 0 1px 0;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .card-stack .card:first-child {
-        border-radius: 4px 4px 0 0;
-    }
-
-    .card-stack .card:last-child {
-        border-radius: 0 0 4px 4px;
-    }
-
-    .flex-row {
-        flex-direction: column;
-        gap: 12px;
-    }
-
     .project-line {
-        display: flex;
         flex-direction: column;
         width: var(--width-mobile);
+    }
+
+    .project-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .project-description {
+        font-size: var(--font-size-md);
     }
 
     .section-title {
         width: var(--width-mobile);
+        font-size: var(--font-size-lg);
     }
 
     .project-container {
@@ -707,7 +774,15 @@ a.project {
     }
 
     .huge-text {
-        font-size: 30px;
-        padding: 5vh 0 10vh 0;
+        width: var(--width-mobile);
+        margin: auto;
+        font-size: var(--font-size-2xl);
+        text-align: left;
+        padding: 10vh 0 5vh 0;
+    }
+
+    .tag-container {
+        gap: var(--spacing-md);
     }
 }
+
