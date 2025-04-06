@@ -258,7 +258,7 @@ a.project:hover {
     font-family: var(--font-stack-mono);
     text-align: center;
     mix-blend-mode: difference;
-    margin-top: 85vh;
+    margin-top: 80vh;
     color: var(--white);
 }
 
@@ -326,34 +326,9 @@ a.project:hover {
     width: var(--width-desktop);
     margin: 0 auto;
     padding-bottom: var(--spacing-6xl);
+    max-width: var(--max-width-desktop);
+    width: var(--width-desktop);
 }
-
-@media (max-width: 1200px) {
-    .service-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-2xl);
-    }
-    .service-name {
-
-        height: var(--spacing-4xl);
-    }
-    .team-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-2xl);
-    }
-    .team-card {
-        padding: var(--spacing-2xl);
-        border-radius: var(--border-radius-lg);
-        background-color: var(--slightly-warm-gray);
-        transition: transform var(--transition-normal) ease;
-    }
-    
-}
-
-
-
 
 
 .service-card {
@@ -379,7 +354,6 @@ a.project:hover {
 .team-name {
     padding-top: var(--spacing-lg);
     font-size: var(--font-size-xl);
-    height: var(--spacing-5xl);
 }
 
 .service-description {
@@ -400,6 +374,38 @@ a.project:hover {
     object-fit: cover;
 }
 
+
+@media (max-width: 1200px) {
+    .service-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2xl);
+    }
+    .service-name {
+
+        height: var(--spacing-4xl);
+    }
+
+    .team-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: var(--width-desktop);
+        gap: var(--spacing-3xl);
+    }
+
+    .team-card {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg) var(--spacing-md);
+    }
+
+    .team-name{
+        font-size: var(--font-size-md);
+        height: auto;
+        line-height: 1.15;
+        padding-bottom: 4px;
+    }
+    
+}
 
 .section-title {
     text-align: left;
@@ -845,6 +851,31 @@ textarea {
 
 
 
+    .team-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+        width: var(--width-mobile);
+    }
+
+    .team-card {
+        padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg) var(--spacing-md);
+    }
+
+    .team-name{
+        text-wrap: pretty;
+        font-size: var(--font-size-lg);
+        line-height: 1.2;
+    }
+
+    .team-description {
+        font-size: var(--font-size-md);
+    }
+
+    .team-image {
+
+    }
+
     .service-container {
         display: flex;
         flex-direction: row;
@@ -852,12 +883,7 @@ textarea {
         flex-direction: column;
     }
 
-    .team-container {
-        display: flex;
-        flex-direction: row;
-        width: var(--width-mobile);
-        flex-direction: column;
-    }
+
 
     .huge-text {
         width: var(--width-mobile);
@@ -869,5 +895,14 @@ textarea {
 
     .tag-container {
         gap: var(--spacing-md);
+    }
+
+    .top-right {
+        width: auto;
+        top: 60vh;
+        max-width: var(--width-mobile);
+        text-align: center;
+        right: var(--spacing-xl);
+        left: var(--spacing-xl);
     }
 }
