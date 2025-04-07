@@ -424,10 +424,12 @@ a.project:hover {
 
 .section-title {
     text-align: left;
+    font-family: var(--font-stack-mono);
+    text-transform: uppercase;
     font-size: var(--font-size-xl);
     width: var(--width-desktop);
     max-width: var(--max-width);
-    margin: 0 auto;
+    margin: 0 auto -16px auto;
 }
 
 .display-none {
