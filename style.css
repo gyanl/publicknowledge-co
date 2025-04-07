@@ -273,9 +273,8 @@ a.project:hover {
     position: relative;
     font-family: var(--font-stack-mono);
     text-align: center;
-    mix-blend-mode: difference;
     margin-top: 80vh;
-    color: var(--white);
+    color: var(--charcoal);
 }
 
 .scroll-tip {
