@@ -792,7 +792,8 @@ textarea {
     }
 
     .logo-text {
-        margin-left: var(--spacing-md);
+        top: var(--spacing-xl);
+        left: var(--spacing-lg);
         font-size: var(--font-size-2xl);
         padding: 0px;
     }
@@ -916,7 +917,7 @@ textarea {
 
     .top-right {
         width: auto;
-        top: 60vh;
+        top: 65vh;
         max-width: var(--width-mobile);
         text-align: center;
         right: var(--spacing-xl);
