@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Load Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap">
+
+    <!-- Load Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:image" content="https://publicknowledge.co/pk-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:title" content="Internships at Public Knowledge">
+    <meta property="og:description" content="Join Public Knowledge as an intern and work on meaningful projects that shape the future of digital experiences.">
+    <meta property="og:url" content="https://publicknowledge.co/internship">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Public Knowledge Studio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@pblcknw">
+    <meta name="twitter:creator" content="@pblcknw">
+
+    <title>Internships at Public Knowledge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="logo-text">PUBLIC<br>KNOW*<br>LEDGE</div>
+
+    <div class="container" style="margin-top: 100px !important;">
+        <div id="animate-words" class="huge-text">
+            Join us in shaping the future of digital experiences. We&rsquo;re looking for curious minds who want to learn, grow, and make an impact.
+        </div>
+
+        <div class="section-title">Internship Opportunities</div>
+
+        <div class="service-container">
+            <div class="service-card">
+                <div class="service-name">UI/UX Design</div>
+                <div class="service-description">Work on real client projects, from research to final designs. Learn to create interfaces that are both beautiful and functional.</div>
+            </div>
+        </div>
+
+        <div class="section-title">What We Offer</div>
+
+        <div class="project-container">
+            <div class="project-line">
+                <div class="project">
+                    <div class="project-title">Mentorship</div>
+                    <div class="project-description">Work directly with our team of experienced designers and developers. Get regular feedback and guidance on your work.</div>
+                </div>
+
+                <div class="project">
+                    <div class="project-title">Real Projects</div>
+                    <div class="project-description">Contribute to actual client work from day one. Build your portfolio with meaningful projects that make a difference.</div>
+                </div>
+            </div>
+
+            <div class="project-line">
+                <div class="project">
+                    <div class="project-title">Learning Resources</div>
+                    <div class="project-description">Access to our library of design and development resources. Regular workshops and learning sessions with the team.</div>
+                </div>
+
+                <div class="project">
+                    <div class="project-title">Flexible Schedule</div>
+                    <div class="project-description">We understand you&rsquo;re learning. Work hours that fit your schedule while maintaining regular team syncs.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">How to Apply</div>
+
+        <div class="service-container">
+            <div class="service-card">
+                <div class="service-name">1. Portfolio</div>
+                <div class="service-description">Share your work—whether it&rsquo;s class projects, personal work, or client projects. Show us your process and thinking.</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-name">2. Cover Letter</div>
+                <div class="service-description">Tell us why you&rsquo;re interested in interning with us. What do you hope to learn? What excites you about design and technology?</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-name">3. Apply</div>
+                <div class="service-description">Send your portfolio and cover letter to <a href="mailto:internships@publicknowledge.co">internships@publicknowledge.co</a>. We&rsquo;ll get back to you within a week.</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Public Knowledge Studio 2025
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof window.anime === 'undefined') {
+                console.error('Anime.js library not loaded');
+                return;
+            }
+
+            // Animate huge text
+            const hugeTexts = document.querySelectorAll('.huge-text');
+            hugeTexts.forEach(textElement => {
+                const text = textElement.textContent;
+                textElement.textContent = '';
+
+                text.split('').forEach(word => {
+                    const span = document.createElement('span');
+                    span.textContent = word;
+                    span.style.opacity = '0';
+                    textElement.appendChild(span);
+                });
+
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        window.anime({
+                            targets: textElement.querySelectorAll('span'),
+                            opacity: [.5, 1],
+                            duration: 140,
+                            delay: window.anime.stagger(10, { from: 10, to: 100, random: true }),
+                            easing: 'easeInOutSine'
+                        });
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(textElement);
+            });
+
+            // Animate service cards
+            const serviceContainer = document.querySelector('.service-container');
+            const serviceItems = serviceContainer.querySelectorAll('.service-card');
+            serviceItems.forEach((item, index) => {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        window.anime({
+                            targets: item,
+                            translateY: [20, 0],
+                            opacity: [0, 1],
+                            duration: 2000,
+                            delay: 200 + (index * 300)
+                        });
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(item);
+            });
+
+            // Animate project cards
+            const projectLines = document.querySelectorAll('.project-line');
+            projectLines.forEach(projectLine => {
+                const projectItems = projectLine.querySelectorAll('.project');
+                projectItems.forEach((item, index) => {
+                    const observer = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting) {
+                            window.anime({
+                                targets: item,
+                                translateY: [20, 0],
+                                opacity: [0, 1],
+                                duration: 2000,
+                                delay: 200 + (index * 200)
+                            });
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(item);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
