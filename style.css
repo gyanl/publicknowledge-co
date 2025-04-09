@@ -149,6 +149,33 @@ body {
     background-color: var(--background-color);
 }
 
+.quote-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-md);
+    width: var(--width-desktop);
+    max-width: var(--max-width);
+    margin: auto;
+    padding: var(--spacing-3xl) 0 var(--spacing-xs) 0;
+}
+
+.quote-text {
+    font-size: var(--font-size-2xl);
+    border-right: 1.5px solid var(--text-reg);
+    flex-basis: 1;
+    padding-right: var(--spacing-2xl);
+}
+
+.quote-author {
+    padding-left: var(--spacing-2xl);
+    font-family: var(--font-stack-mono);
+    flex-basis: 2;
+    font-size: var(--font-size-xl);
+    text-transform: uppercase;
+    opacity: .85;
+}
+
 header {
     display: flex;
     flex-direction: row;
@@ -923,4 +950,23 @@ textarea {
         right: var(--spacing-xl);
         left: var(--spacing-xl);
     }
+
+    .quote-container {
+        flex-direction: column;
+        width: var(--width-mobile);
+        padding: 0 var(--spacing-md);
+    }
+
+    .quote-text {
+        font-size: var(--font-size-xl);
+        border: none;
+        padding-right: 0;
+    }
+
+    .quote-author {
+        font-size: var(--font-size-lg);
+        padding-left: 0;
+    }
+    
+    
 }

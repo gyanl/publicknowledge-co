@@ -13,7 +13,7 @@ class AsteriskAnimation {
       initialLength: 18,
       initialWidth: 16,
       debounceDelay: 250,
-      videoSource: 'sizzle-reel.mp4',
+      videoSource: 'radial-flowers.mp4',
       ...options
     };
 
