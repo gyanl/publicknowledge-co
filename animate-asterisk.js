@@ -85,7 +85,7 @@ class AsteriskAnimation {
       }).catch(error => {
         console.warn('Autoplay prevented:', error);
         // Add a play button if autoplay is blocked
-        this.addPlayButton();
+        // this.addPlayButton();
       });
     }
   }

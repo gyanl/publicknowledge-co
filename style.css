@@ -808,7 +808,7 @@ textarea {
 }
 
 .startup-card-image {
-    width: 50%;
+    width: 100%;
     flex-grow: 1;
     object-fit: cover;
     background-image: url(img/glassy-asterisk-light.png);
@@ -834,7 +834,6 @@ textarea {
     font-size: var(--font-size-md);
     color: var(--text-reg);
     line-height: 1.5;
-    margin-bottom: 2rem;
 }
 
 .startup-pricing {
