@@ -233,7 +233,6 @@ h5 {
 }
 
 .project {
-    flex: 1;
     padding: var(--spacing-md);
     border-radius: calc(var(--border-radius-lg) + 4px);
 }
@@ -302,9 +301,6 @@ a.project:hover {
     text-align: center;
     margin-top: 80vh;
     color: var(--charcoal);
-}
-
-.scroll-tip {
     animation: bounce 3s infinite;
     animation-delay: 4s;
 }
@@ -388,6 +384,9 @@ a.project:hover {
 }
 
 
+
+
+
 .service-name {
     font-size: var(--font-size-xl);
     height: var(--spacing-5xl);
@@ -423,6 +422,7 @@ a.project:hover {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-2xl);
     }
+
     .service-name {
 
         height: var(--spacing-4xl);
@@ -440,13 +440,13 @@ a.project:hover {
         padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg) var(--spacing-md);
     }
 
-    .team-name{
+    .team-name {
         font-size: var(--font-size-md);
         height: auto;
         line-height: 1.15;
         padding-bottom: 4px;
     }
-    
+
 }
 
 .section-title {
@@ -565,7 +565,8 @@ a.project:hover {
     text-align: right;
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    align-items: flex-end;
+    max-width: 320px;
     position: absolute;
     top: var(--spacing-2xl);
     right: var(--spacing-xl);
@@ -765,6 +766,14 @@ a:focus-visible {
     outline-offset: var(--focus-outline-offset);
 }
 
+/* Startup CTA specific link styles */
+a.startup-cta,
+a.startup-cta:visited,
+a.startup-cta:hover,
+a.startup-cta:active {
+    color: var(--charcoal);
+}
+
 /* Improve form control accessibility */
 input,
 button,
@@ -781,8 +790,134 @@ textarea {
     cursor: not-allowed;
 }
 
+.startup-card {
+    display: flex;
+    flex-direction: row;
+    border-radius: var(--border-radius-lg);
+    background-color: var(--slightly-warm-gray);
+    transition: transform var(--transition-normal) ease;
+    width: var(--width-desktop);
+    max-width: var(--max-width);
+    margin: auto;
+    overflow: hidden;
+}
+
+.startup-card-content {
+    flex-grow: 1;
+    padding: var(--spacing-md) var(--spacing-2xl) var(--spacing-3xl) var(--spacing-2xl);
+}
+
+.startup-card-image {
+    width: 50%;
+    flex-grow: 1;
+    object-fit: cover;
+    background-image: url(img/glassy-asterisk-light.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media (prefers-color-scheme: dark) {
+    .startup-card-image {
+        background-image: url(img/glassy-asterisk-dark.png);
+    }
+}
+
+.startup-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.startup-description {
+    font-size: var(--font-size-md);
+    color: var(--text-reg);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.startup-pricing {
+    font-size: var(--font-size-sm);
+    color: var(--black-5);
+    margin: 1rem 0;
+}
+
+a .startup-cta {
+    color: var(--charcoal);
+}
+
+a .startup-cta:hover {
+    color: var(--charcoal);
+}
+
+.startup-cta {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) var(--spacing-sm);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    color: var(--charcoal);
+    font-family: var(--font-stack-sans);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--white), var(--white)) padding-box,
+        radial-gradient(circle at top left,
+            rgba(255, 0, 0, 0.4),
+            rgba(255, 140, 0, 0.4),
+            rgba(255, 215, 0, 0.4),
+            rgba(0, 255, 0, 0.4),
+            rgba(0, 255, 255, 0.4),
+            rgba(0, 0, 255, 0.4),
+            rgba(255, 0, 255, 0.4),
+            rgba(255, 0, 0, 0.4)) border-box;
+    background-size: 400% 400%;
+    animation: rainbow-border 10s linear infinite;
+}
+
+.startup-cta:hover {
+    animation: rainbow-border 4s linear infinite;
+    transform: translateY(-1px);
+}
+
+@keyframes rainbow-border {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.cta-avatars {
+    display: flex;
+    margin-right: 0.5rem;
+}
+
+.cta-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--background-color);
+    margin-right: -12px;
+}
+
 /* Mobile Styles */
 @media (max-width: 800px) {
+
+    .scroll-tip {
+        display: none;
+    }
+
     #logo {
         position: absolute;
         height: var(--logo-size-mobile);
@@ -849,6 +984,8 @@ textarea {
         border-bottom: 1px solid var(--black-5);
     }
 
+
+
     .card-stack .card:first-child {
         border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
     }
@@ -865,7 +1002,7 @@ textarea {
     .container {
         padding: 0;
         position: relative;
-        margin: 120vh 0 0 0;
+        margin: 160vh 0 0 0;
         border-radius: 0;
         bottom: 0;
     }
@@ -903,11 +1040,12 @@ textarea {
         width: var(--width-mobile);
     }
 
+
     .team-card {
         padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg) var(--spacing-md);
     }
 
-    .team-name{
+    .team-name {
         text-wrap: pretty;
         font-size: var(--font-size-lg);
         line-height: 1.2;
@@ -917,9 +1055,7 @@ textarea {
         font-size: var(--font-size-md);
     }
 
-    .team-image {
-
-    }
+    .team-image {}
 
     .service-container {
         display: flex;
@@ -946,9 +1082,12 @@ textarea {
         width: auto;
         top: 65vh;
         max-width: var(--width-mobile);
+        align-items: center;
         text-align: center;
         right: var(--spacing-xl);
         left: var(--spacing-xl);
+        flex-direction: column-reverse;
+        gap: var(--spacing-lg);
     }
 
     .quote-container {
@@ -967,6 +1106,24 @@ textarea {
         font-size: var(--font-size-lg);
         padding-left: 0;
     }
-    
-    
+
+    .startup-card {
+        width: var(--width-mobile);
+        flex-direction: column-reverse;
+    }
+
+    .startup-card-image {
+        width: 100%;
+        height: 240px;
+    }
+
+    .startup-title {
+        font-family: var(--font-stack-serif);
+        font-size: var(--font-size-2xl);
+    }
+
+    .startup-description {
+        font-family: var(--font-stack-sans);
+        font-size: var(--font-size-md);
+    }
 }
